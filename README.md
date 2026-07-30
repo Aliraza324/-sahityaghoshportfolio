@@ -1,8 +1,8 @@
-# MAHESH P PAI — Portfolio
+# SAHITYA GHOSH — Portfolio
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mahesh-p-pai-b0987b2a8/)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MAHESHPPAI)
-[![Portfolio](https://img.shields.io/badge/Live_Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://maheshppai-v1.netlify.app)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sahitya-ghosh-9ba098292/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SAHITYA350)
+[![Portfolio](https://img.shields.io/badge/Live_Portfolio-0284c7?style=for-the-badge&logo=render&logoColor=white)](https://sahityaghoshportfolio.onrender.com)
 
 A high-performance personal portfolio showcasing full-stack engineering expertise, architectural design, and a focus on transforming complex problems into elegant, automated solutions.
 
@@ -56,8 +56,8 @@ src/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/MAHESHPPAI/portfolio-website.git
-   cd Portfolio-website
+   git clone https://github.com/SAHITYA350/-sahityaghoshportfolio.git
+   cd -sahityaghoshportfolio
    ```
 
 2. **Install dependencies**
@@ -83,12 +83,13 @@ src/
 
 Let's build something intelligent.
 
-- **Email**: [maheshpailinked@gmail.com](mailto:maheshpailinked@gmail.com)
-- **Instagram**: [_.maheshhhhhh._](https://www.instagram.com/_.maheshhhhhh._/)
+- **Email**: [sahityaghosh350@gmail.com](mailto:sahityaghosh350@gmail.com)
+- **LinkedIn**: [Sahitya Ghosh](https://www.linkedin.com/in/sahitya-ghosh-9ba098292/)
+- **GitHub**: [SAHITYA350](https://github.com/SAHITYA350)
 - **Availability**: Currently available for freelance and full-time opportunities.
 
 ---
 
 <p align="center">
-  MADE BY MAHESH ® 2026
+  MADE BY SAHITYA GHOSH ® 2026
 </p>
