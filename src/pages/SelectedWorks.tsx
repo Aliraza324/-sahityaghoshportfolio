@@ -6,39 +6,91 @@ import './ScrollStack.css';
 const projects = [
   {
     id: "001",
-    title: "Enterprise Resource Architecture",
-    stack: "React / Node.js / Firebase / Firestore",
-    description: "A full-stack ERP engine automating multi-currency invoicing, inventory logic, and international tax compliance for distributed teams.",
-    links: { live: "https://erpbeta.netlify.app", code: "#" },
+    title: "Vault-AI: Knowledge Graph & RAG Platform",
+    stack: "Python / Django / LangChain / LangGraph / Docker / Mistral AI / Razorpay",
+    description: "An AI Knowledge Graph platform converting 6 file types (PDF, Image, DOCX, Markdown) into a searchable Knowledge Graph via a 2-node LangGraph RAG pipeline with top-40 semantic retrieval, page-level citations, and 3-15s asynchronous processing.",
+    links: {
+      live: "https://vaultai-jnof.onrender.com",
+      code: "https://github.com/SAHITYA350/Vault-AI"
+    },
     image: "/p1.png",
-    cta: "Live Project"
   },
   {
     id: "002",
-    title: "Geospatial Workforce Analytics",
-    stack: "React / Redux / Google Maps API/ Firebase",
-    description: "Real-time tracking system implementing location-based validation protocols and live route visualization for workforce monitoring.",
-    links: { live: "#", code: "#" },
+    title: "ResearchMind AI OS: Multi-Agent System",
+    stack: "Python / LangChain / Streamlit / Plotly / ReportLab / python-docx",
+    description: "A 6-agent collaborative research OS (Search, Scrape, Research, Draft, Critique, Forecast) synthesizing multi-source findings into citation-ready reports with Plotly analytics and an 85% reduction in manual compilation time.",
+    links: {
+      live: "https://researchmind-ai-os-8tgkgl4vd5ojcg4jzlpnpw.streamlit.app/",
+      code: "https://github.com/SAHITYA350/ResearchMind-AI-OS"
+    },
     image: "/p2.png",
-    cta: "Live Project"
   },
   {
     id: "003",
-    title: "OrderEase: Real-time online table food ordering system",
-    stack: "React / Firebase / Node.js",
-    description: "A real-time restaurant table ordering system that allows customers to place food orders directly from their table while enabling admins to manage menus, waiters, and assign waiters to customers for seamless service coordination.",
-    links: { live: "https://github.com/MAHESHPPAI/OrderEase", code: "#" },
+    title: "AI-Powered Food Delivery Ecosystem",
+    stack: "MERN / Microservices / RabbitMQ / Docker / LangChain / Redis / Socket.IO",
+    description: "An event-driven microservices architecture (10+ services) supporting 1,000+ concurrent orders, real-time tracking, Stripe/Razorpay SaaS payments, and voice-enabled semantic RAG ordering cutting checkout steps by 40%.",
+    links: {
+      live: "https://tomatowebapp-5f4d.onrender.com",
+      code: "https://github.com/SAHITYA350/TomatoWebAPP"
+    },
     image: "./p3.png",
-    cta: "View on Github"
   },
   {
     id: "004",
-    title: "BusBuddy: Transit Management Logic",
-    stack: "React / Firebase / Springboot / ngrok",
-    description: "A real-time campus transportation platform that enables students to book seats and track buses live, drivers to stream GPS data during journeys, and transport officers to manage fleet availability, monitoring, and notifications seamlessly.",
-    links: { live: "https://github.com/MAHESHPPAI/Busbuddy-latest", code: "#" },
+    title: "SG Interview Prep AI Platform",
+    stack: "React / Node.js / Express / MongoDB / LangChain / Gemini AI",
+    description: "An AI candidate evaluation platform featuring dynamic interview question generation, response scoring, and real-time feedback, achieving 30% lower REST API latency and 40% performance gain.",
+    links: {
+      live: "https://sginterviewprepai.onrender.com/",
+      code: "https://github.com/SAHITYA350"
+    },
     image: "./p4.png",
-    cta: "View on Github"
+  },
+  {
+    id: "005",
+    title: "Trimrr – MERN Stack URL Shortener",
+    stack: "React / Node.js / ExpressJS/ MongoDB / Tailwind",
+    description: "A responsive URL Shortener & Analytics platform using the MERN stack that allows users to create short links, generate QR codes, and track link performance in real time.",
+    links: {
+      live: "https://trimrrs.onrender.com/",
+      code: "https://github.com/SAHITYA350/TRIMRR"
+    },
+    image: "/p5.png", // Image placed in public/ folder
+  },
+  {
+    id: "006",
+    title: "Cryptoverse – Crypto Dashboard",
+    stack: "React / Redux-Toolkit/ APIs / Tailwind / Frontend",
+    description: "Built a fully responsive Cryptocurrency Dashboard that delivers real-time market insights, historical price trends, and curated crypto news using multiple external APIs.",
+    links: {
+      live: "https://cryptoverse-gilt.vercel.app/",
+      code: "https://github.com/SAHITYA350/Cryptoverse"
+    },
+    image: "/p6.png", // Image placed in public/ folder
+  },
+  {
+    id: "007",
+    title: "DesignStudioPro",
+    stack: "React / Canvas / Konva / DaisyUI / Frontend",
+    description: "A modern, feature-rich Figma/Canva-like design tool built from scratch using React 19, Konva, Vite, Tailwind, and DaisyUI.",
+    links: {
+      live: "https://design-studio-pro-orcin.vercel.app/",
+      code: "https://github.com/SAHITYA350/DesignStudioPro"
+    },
+    image: "/p7.png", // Image placed in public/ folder
+  },
+  {
+    id: "008",
+    title: "Media Search Application",
+    stack: "React / Redux-Toolkit / Framer-Motion / DaisyUI / Frontend",
+    description: "I built a fully responsive hashtag#Mediasearch application that allows users to discover, save, and manage photos, videos, and GIFs from multiple premium APIs, all wrapped in a high-end, animated dark UI.",
+    links: {
+      live: "https://media-search-zeta.vercel.app/",
+      code: "https://github.com/SAHITYA350/MediaSearch"
+    },
+    image: "/p8.png", // Image placed in public/ folder
   },
 ];
 
@@ -52,7 +104,7 @@ const ScrollStackCard = ({ project, index }: ScrollStackCardProps) => {
     <StarBorder
       as="div"
       className="scroll-stack-card"
-      color="#00f2fe, #4facfe, #7000ff"
+      color="#ffffff, #333333, #ffffff"
       speed="8s"
     >
       <div className="card-top-row">
@@ -64,17 +116,34 @@ const ScrollStackCard = ({ project, index }: ScrollStackCardProps) => {
           </div>
         </div>
 
-        <StarBorder
-          as="a"
-          href={project.links.live}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="live-btn-star"
-          color="#f6d365, #fda085"
-          speed="3s"
-        >
-          {project.cta}
-        </StarBorder>
+        <div className="flex items-center gap-3 flex-wrap">
+          {project.links.live && (
+            <StarBorder
+              as="a"
+              href={project.links.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="live-btn-star"
+              color="#ffffff, #333333, #ffffff"
+              speed="3s"
+            >
+              Live Demo ↗
+            </StarBorder>
+          )}
+          {project.links.code && (
+            <StarBorder
+              as="a"
+              href={project.links.code}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="live-btn-star"
+              color="#ffffff, #333333, #ffffff"
+              speed="4s"
+            >
+              GitHub ↗
+            </StarBorder>
+          )}
+        </div>
       </div>
 
       <div className="content-grid">
@@ -142,7 +211,10 @@ const SelectedWorks = () => {
     const containerHeight = window.innerHeight;
     const firstCardHeight = cards[0].offsetHeight;
 
-    const stackPositionPx = (containerHeight - firstCardHeight) / 2;
+    const isMobile = window.innerWidth <= 768;
+    const stackPositionPx = isMobile
+      ? Math.max(88, (containerHeight - firstCardHeight) / 2)
+      : (containerHeight - firstCardHeight) / 2;
     const scaleEndPositionPx = stackPositionPx - (BASE_CONFIG.stackPosition - BASE_CONFIG.scaleEndPosition) * containerHeight;
 
     const lastCardTop = cardOffsets[cards.length - 1];
@@ -184,7 +256,7 @@ const SelectedWorks = () => {
         translateY = pinEnd - cardTop + stackPositionPx + BASE_CONFIG.itemStackDistance * i;
       }
 
-      card.style.transform = `translate3d(0, ${Math.round(translateY * 10) / 10}px, 0) scale(${scale})`;
+      card.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;
     }
 
     const voidContainer = voidContainerRef.current;
@@ -193,7 +265,6 @@ const SelectedWorks = () => {
     if (voidContainer && stackInner) {
       const originY = scroll + containerHeight / 2 - stackInnerTop;
       stackInner.style.perspectiveOrigin = `50% ${originY}px`;
-      stackInner.style.perspective = '1500px';
 
       if (voidProgress > 0) {
         if (isMobile) {
@@ -363,14 +434,11 @@ const SelectedWorks = () => {
       card.style.willChange = 'transform';
       card.style.transformOrigin = 'top center';
     });
-    const resizeObserver = new ResizeObserver(() => calculateAndRender());
-    cards.forEach((card) => resizeObserver.observe(card));
     calculateAndRender();
     const initTimer = setTimeout(calculateAndRender, 100);
     window.addEventListener('resize', calculateAndRender, { passive: true });
     return () => {
       clearTimeout(initTimer);
-      resizeObserver.disconnect();
       window.removeEventListener('resize', calculateAndRender);
     };
   }, [calculateAndRender]);

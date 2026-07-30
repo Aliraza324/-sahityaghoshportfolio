@@ -1,14 +1,16 @@
 .menu__item {
     position: relative;
     overflow: hidden;
-    height: 11vh;
+    height: clamp(70px, 10.5vh, 105px);
+    will-change: opacity, transform;
+    contain: layout paint;
 }
 
 .menu__item-link {
     display: flex;
     align-items: center;
     height: 100%;
-    font-size: 3.5vh;
+    font-size: clamp(18px, 2.8vh, 28px);
     font-weight: 900;
     padding-left: 10%;
     text-transform: uppercase;
@@ -22,8 +24,8 @@
 }
 
 .menu__item-arrow {
-    width: 3.5vh;
-    height: 3.5vh;
+    width: clamp(18px, 2.8vh, 28px);
+    height: clamp(18px, 2.8vh, 28px);
     /* Optional: Slight rotation logic if you want to animate it later */
     transform-origin: center;
     transition: transform 0.3s ease;
@@ -54,6 +56,7 @@
     pointer-events: none;
     z-index: 2;
     cursor: pointer;
+    will-change: transform;
 }
 
 @media (hover: hover) {
@@ -73,6 +76,8 @@
     white-space: nowrap;
     height: 100%;
     align-items: center;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* --- DESKTOP DEFAULTS --- */
@@ -91,7 +96,7 @@
 }
 
 .marquee__icon {
-    height: 5vh;
+    height: clamp(36px, 5.5vh, 52px);
     width: auto;
 }
 
@@ -99,7 +104,7 @@
     color: white;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 3vh;
+    font-size: clamp(18px, 2.8vh, 28px);
     text-transform: uppercase;
 }
 
@@ -136,19 +141,19 @@
 /* --- MOBILE SPECIFIC (Phones) --- */
 @media (max-width: 768px) {
     .menu__item {
-        height: 80px;
+        height: 76px;
     }
 
     .menu__item-link {
-        font-size: 24px;
+        font-size: clamp(14px, 4.5vw, 18px);
         padding-left: 20px;
         gap: 10px;
         /* Smaller gap for arrow on phone */
     }
 
     .menu__item-arrow {
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
     }
 
     .marquee__part {
@@ -161,10 +166,45 @@
     }
 
     .marquee__icon {
-        height: 30px;
+        height: 36px;
     }
 
     .marquee__text {
-        font-size: 16px;
+        font-size: 17px;
+    }
+}
+
+/* --- ULTRA SMALL PHONES (e.g. Galaxy Fold at 270px) --- */
+@media (max-width: 340px) {
+    .menu__item {
+        height: 54px;
+    }
+
+    .menu__item-link {
+        font-size: 13px;
+        padding-left: 12px;
+        gap: 6px;
+    }
+
+    .menu__item-arrow {
+        width: 14px;
+        height: 14px;
+    }
+
+    .marquee__part {
+        padding-right: 20px;
+    }
+
+    .marquee__icon-box {
+        margin: 0 16px;
+        gap: 8px;
+    }
+
+    .marquee__icon {
+        height: 24px;
+    }
+
+    .marquee__text {
+        font-size: 13px;
     }
 }

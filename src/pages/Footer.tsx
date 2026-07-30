@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import FooterExplosion from "@/components/FooterExplosion";
 
 const Footer = () => {
   const footerRef = useRef<HTMLElement>(null);
@@ -34,11 +35,12 @@ const Footer = () => {
   };
 
   return (
-    <footer ref={footerRef} className="bg-black text-white font-sans pt-12 md:pt-20 border-t border-white h-screen flex flex-col">
+    <footer ref={footerRef} className="relative bg-black text-white font-sans pt-12 md:pt-20 border-t border-white h-screen flex flex-col overflow-hidden">
+      <FooterExplosion footerRef={footerRef} />
 
       {/* Top Section: Info Grid */}
       <motion.div
-        className="px-6 md:px-12 lg:px-16 max-w-[1600px] mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 shrink-0"
+        className="px-6 md:px-12 lg:px-16 max-w-[1600px] mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-12 shrink-0 relative z-20"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -50,13 +52,13 @@ const Footer = () => {
             Identification
           </h3>
           <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide leading-relaxed">
-            Mahesh P Pai
+            Sahitya Ghosh
           </p>
           <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide leading-relaxed text-white/60">
-            Full Stack Engineer
+            AI & Full-Stack Software Engineer
           </p>
           <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide leading-relaxed text-white/60">
-            Kerala, India [Lat: 9.7, Long: 76.5]
+            Kolkata, West Bengal, India [Lat: 22.57, Long: 88.36]
           </p>
         </motion.div>
 
@@ -67,13 +69,13 @@ const Footer = () => {
           </h3>
           <div className="flex flex-col gap-2">
             <a
-              href="mailto:maheshpailinked@gmail.com"
+              href="mailto:sahityaghosh350@gmail.com"
               className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide hover:underline underline-offset-4 decoration-1 w-fit flex items-center gap-1"
             >
               Email ↗
             </a>
             <a
-              href="https://www.linkedin.com/in/mahesh-p-pai-b0987b2a8/"
+              href="https://www.linkedin.com/in/sahitya-ghosh-9ba098292/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide hover:underline underline-offset-4 decoration-1 w-fit flex items-center gap-1"
@@ -81,12 +83,20 @@ const Footer = () => {
               LinkedIn ↗
             </a>
             <a
-              href="https://github.com/MAHESHPPAI"
+              href="https://github.com/SAHITYA350"
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide hover:underline underline-offset-4 decoration-1 w-fit flex items-center gap-1"
             >
               GitHub ↗
+            </a>
+            <a
+              href="https://leetcode.com/balasur"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide hover:underline underline-offset-4 decoration-1 w-fit flex items-center gap-1 text-white/60"
+            >
+              LeetCode (200+) ↗
             </a>
           </div>
         </motion.div>
@@ -98,13 +108,13 @@ const Footer = () => {
               Colophon
             </h3>
             <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide text-white/60">
-              Built With: React / GSAP / Framer / Lenis
+              Built With: React / TypeScript / Framer / Lenis / Gsap / scroltrigger
             </p>
             <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide text-white/60">
-              Typeface: Inter / Halvetica
+             Book your Meeting / instance meeting
             </p>
             <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide text-white/60">
-              Deployed On: Vercel
+              Deployed On: Render
             </p>
           </div>
 
@@ -119,10 +129,10 @@ const Footer = () => {
       {/* Bottom Section: Branding Text */}
       <motion.div
         style={{ opacity: textOpacity, scale: textScale }}
-        className="w-full flex-1 flex flex-col justify-center items-center overflow-hidden select-none pb-4"
+        className="w-full flex-1 flex flex-col justify-center items-center overflow-hidden select-none pb-4 relative z-20"
       >
-        <h1 className="font-sans font-black text-[23vw] leading-[0.8] text-white uppercase tracking-tighter flex items-start">
-          Mahesh
+        <h1 className="font-sans font-black text-[21vw] leading-[0.8] text-white uppercase tracking-tighter flex items-start">
+          Sahitya
           <span className="text-xl md:text-4xl lg:text-6xl font-medium mt-[2vw] ml-1 opacity-60">
             ®
           </span>

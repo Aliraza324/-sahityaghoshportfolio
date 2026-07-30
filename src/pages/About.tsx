@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Trophy, Award, Zap } from "lucide-react";
 
 const About = () => {
   // Safe window height check for SSR
@@ -37,77 +38,99 @@ const About = () => {
   const opacity4 = useTransform(scrollY, [vh * 0.3, vh * 0.6], [0, 1]);
 
   return (
-    <section className="h-screen w-full bg-white text-black font-sans px-6 md:px-12 lg:px-16 overflow-hidden flex items-center justify-center relative">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-x-12 w-full max-w-[1600px] mx-auto">
+    <section className="min-h-screen md:h-screen w-full bg-white text-black font-sans px-6 md:px-12 lg:px-16 pt-14 md:pt-24 pb-8 overflow-y-auto md:overflow-hidden flex items-center justify-center relative">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-x-12 w-full max-w-[1600px] mx-auto py-2">
 
         {/* Left Column: Context Label */}
         <motion.div
-          className="md:col-span-3 lg:col-span-3 pt-2"
+          className="md:col-span-3 lg:col-span-3 pt-2 md:pt-4"
           style={{ y: y1, opacity: opacity1 }}
         >
-          <h2 className="font-sans text-xs md:text-sm font-bold uppercase tracking-widest">
+          <h2 className="font-sans text-xs md:text-sm font-bold uppercase tracking-widest text-black/90">
             Background & Data
           </h2>
         </motion.div>
 
         {/* Right Column: The Data List */}
-        <div className="md:col-span-9 lg:col-span-9 flex flex-col gap-10 md:gap-12">
+        <div className="md:col-span-9 lg:col-span-9 flex flex-col gap-4 md:gap-7">
 
           {/* 01. EDUCATION */}
-          <motion.div style={{ y: y2, opacity: opacity2 }} className="flex flex-col gap-2">
-            <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide opacity-100 mb-1">
+          <motion.div style={{ y: y2, opacity: opacity2 }} className="flex flex-col gap-1">
+            <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide opacity-100 mb-0.5">
               01. Education
             </h3>
             <div className="flex flex-col">
-              <p className="font-sans text-xl md:text-2xl lg:text-3xl font-bold leading-tight tracking-tight">
-                Indian Institute of Information Technology, Kottayam
+              <p className="font-sans text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-snug tracking-tight">
+                Nalanda Institute of Technology, Bhubaneswar
               </p>
-              <p className="font-sans text-xl md:text-2xl lg:text-3xl font-normal text-black/70 leading-tight tracking-tight">
-                B.Tech, Computer Science & Engineering (2023–2027)
+              <p className="font-sans text-[13px] sm:text-base md:text-lg lg:text-xl font-normal text-black/70 leading-snug tracking-tight">
+                B.Tech, Computer Science & Engineering (2023–2027) — CGPA: 8.50 / 10
               </p>
             </div>
           </motion.div>
 
           {/* 02. EXPERIENCE */}
-          <motion.div style={{ y: y3, opacity: opacity3 }} className="flex flex-col gap-2">
-            <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide opacity-100 mb-1">
+          <motion.div style={{ y: y3, opacity: opacity3 }} className="flex flex-col gap-1">
+            <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide opacity-100 mb-0.5">
               02. Experience
             </h3>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2 md:gap-3">
               {/* Job 1 */}
               <div>
-                <p className="font-sans text-xl md:text-2xl lg:text-3xl font-bold leading-tight tracking-tight">
-                  aiRender Technologies
+                <p className="font-sans text-base sm:text-lg md:text-xl font-bold leading-snug tracking-tight">
+                  MindBrain Innovations Pvt. Ltd.
                 </p>
-                <p className="font-sans text-xl md:text-2xl lg:text-3xl font-normal text-black/70 leading-tight tracking-tight">
-                  Full Stack Developer (May 2025 – May 2026)
+                <p className="font-sans text-[13px] sm:text-base md:text-lg font-normal text-black/70 leading-snug tracking-tight">
+                  Python Full-Stack Intern (June 2026 – July 2026 · Onsite - Bhubaneswar)
                 </p>
               </div>
 
               {/* Job 2 */}
               <div>
-                <p className="font-sans text-xl md:text-2xl lg:text-3xl font-bold leading-tight tracking-tight">
-                  Infosys Springboard
+                <p className="font-sans text-base sm:text-lg md:text-xl font-bold leading-snug tracking-tight">
+                  Jayesta Corporate Entity
                 </p>
-                <p className="font-sans text-xl md:text-2xl lg:text-3xl font-normal text-black/70 leading-tight tracking-tight">
-                  Web Development Intern (Oct 2024 – Dec 2024)
+                <p className="font-sans text-[13px] sm:text-base md:text-lg font-normal text-black/70 leading-snug tracking-tight">
+                  Full-Stack Web Development Intern (June 2025 – July 2025 · Remote)
+                </p>
+              </div>
+
+              {/* Job 3 */}
+              <div>
+                <p className="font-sans text-base sm:text-lg md:text-xl font-bold leading-snug tracking-tight">
+                  1Stop.ai
+                </p>
+                <p className="font-sans text-[13px] sm:text-base md:text-lg font-normal text-black/70 leading-snug tracking-tight">
+                  Artificial Intelligence Intern (March 2025 – April 2025 · Remote)
                 </p>
               </div>
             </div>
           </motion.div>
 
           {/* 03. FOCUS */}
-          <motion.div style={{ y: y4, opacity: opacity4 }} className="flex flex-col gap-2">
-            <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide opacity-100 mb-1">
-              03. Focus
+          <motion.div style={{ y: y4, opacity: opacity4 }} className="flex flex-col gap-1">
+            <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide opacity-100 mb-0.5">
+              03. Focus & Achievements
             </h3>
-            <ul className="flex flex-col">
-              <li className="font-sans text-xl md:text-2xl lg:text-3xl font-bold leading-tight tracking-tight">
-                Software Engineering Architecture
+            <ul className="flex flex-col gap-1 md:gap-1.5">
+              <li className="font-sans text-sm sm:text-base md:text-lg font-bold leading-snug tracking-tight">
+                Agentic AI, RAG Systems & Multi-Agent Architecture (LangChain / LangGraph)
               </li>
-              <li className="font-sans text-xl md:text-2xl lg:text-3xl font-bold leading-tight tracking-tight">
-                Artificial Intelligence & Process Automation
+              <li className="font-sans text-sm sm:text-base md:text-lg font-bold leading-snug tracking-tight">
+                Full-Stack SaaS & Event-Driven Microservices (MERN / Python / Docker)
+              </li>
+              <li className="font-sans text-[11px] sm:text-xs md:text-sm lg:text-base font-medium text-black/75 leading-snug tracking-tight flex items-center gap-2 mt-0.5">
+                <Trophy className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+                <span>5th Runner-Up — TRIDENT Hackathon 2026 (Team MOMENT)</span>
+              </li>
+              <li className="font-sans text-[11px] sm:text-xs md:text-sm lg:text-base font-medium text-black/75 leading-snug tracking-tight flex items-center gap-2">
+                <Award className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+                <span>Python Full-Stack Development Certification — MindBrain Innovations</span>
+              </li>
+              <li className="font-sans text-[11px] sm:text-xs md:text-sm lg:text-base font-medium text-black/75 leading-snug tracking-tight flex items-center gap-2">
+                <Zap className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+                <span>200+ Algorithmic Problems Solved on LeetCode</span>
               </li>
             </ul>
           </motion.div>

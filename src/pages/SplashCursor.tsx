@@ -1,5 +1,4 @@
-'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface ColorRGB {
   r: number;
@@ -53,23 +52,23 @@ function pointerPrototype(): Pointer {
 }
 
 export default function SplashCursor({
-  SIM_RESOLUTION = 128,
+  SIM_RESOLUTION = 256, // Increased for thicker, higher quality smoke
   DYE_RESOLUTION = 1440,
   CAPTURE_RESOLUTION = 512,
-  DENSITY_DISSIPATION = 3.5,
-  VELOCITY_DISSIPATION = 2,
+  DENSITY_DISSIPATION = 0.8, // Lowered for thicker smoke that lingers
+  VELOCITY_DISSIPATION = 0.2, // Lowered so the smoke keeps swirling
   PRESSURE = 0.1,
   PRESSURE_ITERATIONS = 20,
-  CURL = 3,
-  SPLAT_RADIUS = 0.2,
-  SPLAT_FORCE = 6000,
+  CURL = 35, // Increased for more vorticity/swirls
+  SPLAT_RADIUS = 0.25, // Slightly larger splats for thicker puffs
+  SPLAT_FORCE = 6000, // Stronger force for premium bursts
   SHADING = true,
   COLOR_UPDATE_SPEED = 10,
   BACK_COLOR = { r: 0.5, g: 0, b: 0 },
   TRANSPARENT = true
 }: SplashCursorProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [webGLSupported, setWebGLSupported] = React.useState(true);
+  const [webGLSupported, setWebGLSupported] = useState(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -97,7 +96,7 @@ export default function SplashCursor({
 
     let gl: WebGL2RenderingContext | null = null;
     let ext: any = null;
-    
+
     try {
       const result = getWebGLContext(canvas);
       gl = result.gl;
@@ -107,7 +106,7 @@ export default function SplashCursor({
       setWebGLSupported(false);
       return;
     }
-    
+
     if (!gl || !ext) {
       setWebGLSupported(false);
       return;
@@ -859,7 +858,7 @@ export default function SplashCursor({
     }
 
     function scaleByPixelRatio(input: number) {
-      const pixelRatio = window.devicePixelRatio || 1;
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.25);
       return Math.floor(input * pixelRatio);
     }
 
@@ -1056,17 +1055,32 @@ export default function SplashCursor({
     function splatPointer(pointer: Pointer) {
       const dx = pointer.deltaX * config.SPLAT_FORCE;
       const dy = pointer.deltaY * config.SPLAT_FORCE;
-      splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
+      // Make the moving splat thicker
+      const color = { ...pointer.color };
+      color.r *= 2.0;
+      color.g *= 2.0;
+      color.b *= 2.0;
+      splat(pointer.texcoordX, pointer.texcoordY, dx, dy, color);
     }
 
     function clickSplat(pointer: Pointer) {
-      const color = generateColor();
-      color.r *= 10;
-      color.g *= 10;
-      color.b *= 10;
-      const dx = 10 * (Math.random() - 0.5);
-      const dy = 30 * (Math.random() - 0.5);
-      splat(pointer.texcoordX, pointer.texcoordY, dx, dy, color);
+      // Premium Sprinkle: Burst of colorful splats
+      const numSplats = 6; 
+      for (let i = 0; i < numSplats; i++) {
+        const color = generateColor();
+        color.r *= 8.0;
+        color.g *= 8.0;
+        color.b *= 8.0;
+        
+        const dx = 80 * (Math.random() - 0.5);
+        const dy = 80 * (Math.random() - 0.5);
+        
+        // Slight random offset around the click point for a scattered "sprinkle" look
+        const offsetX = (Math.random() - 0.5) * 0.08;
+        const offsetY = (Math.random() - 0.5) * 0.08;
+        
+        splat(pointer.texcoordX + offsetX, pointer.texcoordY + offsetY, dx, dy, color);
+      }
     }
 
     function splat(x: number, y: number, dx: number, dy: number, color: ColorRGB) {
@@ -1097,6 +1111,21 @@ export default function SplashCursor({
       }
       blit(dye.write);
       dye.swap();
+    }
+
+    function multipleSplats(amount: number) {
+      // Initial premium sprinkle on load
+      for (let i = 0; i < amount; i++) {
+        const color = generateColor();
+        color.r *= 10.0;
+        color.g *= 10.0;
+        color.b *= 10.0;
+        const x = Math.random();
+        const y = Math.random();
+        const dx = 1000 * (Math.random() - 0.5);
+        const dy = 1000 * (Math.random() - 0.5);
+        splat(x, y, dx, dy, color);
+      }
     }
 
     function correctRadius(radius: number) {
@@ -1146,11 +1175,9 @@ export default function SplashCursor({
     }
 
     function generateColor(): ColorRGB {
+      // Using HSVtoRGB for premium, vibrant colors instead of greyscale
       const c = HSVtoRGB(Math.random(), 1.0, 1.0);
-      c.r *= 0.15;
-      c.g *= 0.15;
-      c.b *= 0.15;
-      return c;
+      return { r: c.r * 0.15, g: c.g * 0.15, b: c.b * 0.15 };
     }
 
     function HSVtoRGB(h: number, s: number, v: number): ColorRGB {
@@ -1204,81 +1231,125 @@ export default function SplashCursor({
       return ((value - min) % range) + min;
     }
 
-    window.addEventListener('mousedown', e => {
+    // Apply an initial sprinkle to look beautiful on load
+    multipleSplats(5);
+
+    // Handle interactions globally but map mathematically to the canvas bounds
+    const handleMouseDown = (e: MouseEvent) => {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return;
+
       const pointer = pointers[0];
-      const posX = scaleByPixelRatio(e.clientX);
-      const posY = scaleByPixelRatio(e.clientY);
+      const posX = scaleByPixelRatio(e.clientX - rect.left);
+      const posY = scaleByPixelRatio(e.clientY - rect.top);
       updatePointerDownData(pointer, -1, posX, posY);
       clickSplat(pointer);
-    });
+    };
 
-    function handleFirstMouseMove(e: MouseEvent) {
+    // First interaction initializer
+    const handleFirstMouseMove = (e: MouseEvent) => {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return;
+
       const pointer = pointers[0];
-      const posX = scaleByPixelRatio(e.clientX);
-      const posY = scaleByPixelRatio(e.clientY);
+      const posX = scaleByPixelRatio(e.clientX - rect.left);
+      const posY = scaleByPixelRatio(e.clientY - rect.top);
       const color = generateColor();
       updateFrame();
       updatePointerMoveData(pointer, posX, posY, color);
       document.body.removeEventListener('mousemove', handleFirstMouseMove);
-    }
+    };
     document.body.addEventListener('mousemove', handleFirstMouseMove);
 
-    window.addEventListener('mousemove', e => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+
+      // If outside bounds, don't move the fluid interaction
+      if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return;
+
       const pointer = pointers[0];
-      const posX = scaleByPixelRatio(e.clientX);
-      const posY = scaleByPixelRatio(e.clientY);
+      const posX = scaleByPixelRatio(e.clientX - rect.left);
+      const posY = scaleByPixelRatio(e.clientY - rect.top);
       const color = pointer.color;
       updatePointerMoveData(pointer, posX, posY, color);
-    });
+    };
 
-    function handleFirstTouchStart(e: TouchEvent) {
+    const handleFirstTouchStart = (e: TouchEvent) => {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
       const touches = e.targetTouches;
       const pointer = pointers[0];
+      let triggered = false;
+
       for (let i = 0; i < touches.length; i++) {
-        const posX = scaleByPixelRatio(touches[i].clientX);
-        const posY = scaleByPixelRatio(touches[i].clientY);
-        updateFrame();
-        updatePointerDownData(pointer, touches[i].identifier, posX, posY);
-      }
-      document.body.removeEventListener('touchstart', handleFirstTouchStart);
-    }
-    document.body.addEventListener('touchstart', handleFirstTouchStart);
-
-    window.addEventListener(
-      'touchstart',
-      e => {
-        const touches = e.targetTouches;
-        const pointer = pointers[0];
-        for (let i = 0; i < touches.length; i++) {
-          const posX = scaleByPixelRatio(touches[i].clientX);
-          const posY = scaleByPixelRatio(touches[i].clientY);
+        const clientX = touches[i].clientX;
+        const clientY = touches[i].clientY;
+        if (clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom) {
+          const posX = scaleByPixelRatio(clientX - rect.left);
+          const posY = scaleByPixelRatio(clientY - rect.top);
+          updateFrame();
           updatePointerDownData(pointer, touches[i].identifier, posX, posY);
+          triggered = true;
         }
-      },
-      false
-    );
+      }
+      if (triggered) {
+        document.body.removeEventListener('touchstart', handleFirstTouchStart);
+      }
+    };
+    document.body.addEventListener('touchstart', handleFirstTouchStart, { passive: false });
 
-    window.addEventListener(
-      'touchmove',
-      e => {
-        const touches = e.targetTouches;
-        const pointer = pointers[0];
-        for (let i = 0; i < touches.length; i++) {
-          const posX = scaleByPixelRatio(touches[i].clientX);
-          const posY = scaleByPixelRatio(touches[i].clientY);
+    const handleTouchStart = (e: TouchEvent) => {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const touches = e.targetTouches;
+      const pointer = pointers[0];
+
+      for (let i = 0; i < touches.length; i++) {
+        const clientX = touches[i].clientX;
+        const clientY = touches[i].clientY;
+        // Only process touches hitting the canvas area
+        if (clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom) {
+          const posX = scaleByPixelRatio(clientX - rect.left);
+          const posY = scaleByPixelRatio(clientY - rect.top);
+          updatePointerDownData(pointer, touches[i].identifier, posX, posY);
+          clickSplat(pointer); // Apply sprinkle on touch tap
+        }
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const touches = e.targetTouches;
+      const pointer = pointers[0];
+
+      for (let i = 0; i < touches.length; i++) {
+        const clientX = touches[i].clientX;
+        const clientY = touches[i].clientY;
+        if (clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom) {
+          const posX = scaleByPixelRatio(clientX - rect.left);
+          const posY = scaleByPixelRatio(clientY - rect.top);
           updatePointerMoveData(pointer, posX, posY, pointer.color);
         }
-      },
-      false
-    );
+      }
+    };
 
-    window.addEventListener('touchend', e => {
+    const handleTouchEnd = (e: TouchEvent) => {
       const touches = e.changedTouches;
       const pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {
         updatePointerUpData(pointer);
       }
-    });
+    };
+
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd);
   }, [
     SIM_RESOLUTION,
     DYE_RESOLUTION,
@@ -1306,7 +1377,7 @@ export default function SplashCursor({
         position: 'absolute',
         top: 0,
         left: 0,
-        zIndex: 0,
+        zIndex: 10,
         pointerEvents: 'none',
         width: '100%',
         height: '100%'

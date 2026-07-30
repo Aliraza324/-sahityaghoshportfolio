@@ -1,16 +1,25 @@
 import { useEffect, useRef } from "react";
 import { motion, useSpring, useMotionValue, useScroll, useTransform } from "framer-motion";
-import { Github, Linkedin, Instagram, Mail } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail, Code } from "lucide-react";
+import { useLenis } from "lenis/react";
 
 // Components
 import About from "./About";
 import SplashCursor from "@/components/SplashCursor";
 import SelectedWorks from "./SelectedWorks";
 import VectorBridge from "./VectorBridge";
+import ScrollVelocity from "./ScrollVelocity";
+import CodeShipRepeat from "./CodeShipRepeat";
+import HeroImgHolder from "./HeroImgHolder";
+import PagePreloader from "@/components/PagePreloader";
+import WhatIDo from "./WhatIDo";
+import Certificates from "./Certificates";
 import Footer from "./Footer";
 import Contact from "./Contact";
 import Testimonial from "./Testimonial";
 import Navigation from "@/components/Navigation";
+import { AIChatWidget } from "@/components/AIChatWidget";
+import Magnetic from "@/components/Magnetic";
 
 // --- Cursor Follower ---
 const CursorFollower = () => {
@@ -21,38 +30,43 @@ const CursorFollower = () => {
   const y = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
+    const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX - 12);
       mouseY.set(e.clientY - 12);
     };
-    window.addEventListener("mousemove", moveCursor);
-    return () => window.removeEventListener("mousemove", moveCursor);
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-6 h-6 bg-gray-400/50 rounded-full pointer-events-none z-[9999] hidden lg:block backdrop-blur-[1px]"
+      className="fixed top-0 left-0 w-6 h-6 rounded-full bg-white/20 border border-white/40 pointer-events-none z-50 mix-blend-difference hidden lg:block"
       style={{ x, y }}
     />
   );
 };
 
+// --- Sub-Components ---
 const BrandLogo = () => (
-  <div className="fixed top-6 left-6 md:top-8 md:left-10 z-50 mix-blend-difference">
-    <h1 className="font-sans font-black text-2xl md:text-4xl tracking-tighter text-white flex items-start">
-      MAHESH
-      <span className="text-xs md:text-lg font-medium ml-1 -mt-1 md:-mt-2">®</span>
-    </h1>
-  </div>
+  <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, ease: "easeOut" }}
+    className="fixed top-6 left-6 md:top-8 md:left-10 z-[200]"
+  >
+    <a href="#" className="font-sans font-bold text-xl md:text-2xl tracking-tight text-white uppercase flex items-center gap-1">
+      SAHITYA<span className="text-xs align-top font-normal">®</span>
+    </a>
+  </motion.div>
 );
 
 const AvailabilityBadge = () => (
   <motion.div
-    initial={{ opacity: 0, y: -10 }}
+    initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.4, ease: "easeOut" }}
-    className="absolute z-10 left-1/2 -translate-x-1/2 hidden md:flex items-center gap-2 pointer-events-none"
-    style={{ top: "2.25rem" }}
+    transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+    className="hidden lg:flex items-center gap-2 absolute top-8 left-1/2 -translate-x-1/2 z-20 border border-white/20 bg-white/5 backdrop-blur-sm px-3 py-1.5 rounded-full"
   >
     <span className="relative flex h-1.5 w-1.5">
       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
@@ -66,18 +80,18 @@ const AvailabilityBadge = () => (
 
 const SocialStrip = () => {
   const socials = [
-    { label: "GitHub", href: "https://github.com/MAHESHPPAI" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/mahesh-p-pai-b0987b2a8/" },
-    { label: "Instagram", href: "https://www.instagram.com/mahesh_3.14_/" },
-    { label: "Email", href: "mailto:maheshpailinked@gmail.com" },
+    { label: "GitHub", href: "https://github.com/SAHITYA350" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/sahitya-ghosh-9ba098292/" },
+    { label: "LeetCode", href: "https://leetcode.com/balasur" },
+    { label: "Email", href: "mailto:sahityaghosh350@gmail.com" },
   ];
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="absolute z-20 hidden md:flex flex-col items-center"
-      style={{ right: "64px", top: "112px", bottom: "194px", justifyContent: "center", gap: "1rem" }}
+      className="absolute z-[40] hidden md:flex flex-col items-center pointer-events-auto"
+      style={{ right: "3.5rem", top: "112px", bottom: "180px", justifyContent: "center", gap: "1.2rem" }}
     >
       <span className="w-[1px] h-8 bg-white/30 flex-shrink-0" />
       {socials.map(({ label, href }) => (
@@ -87,10 +101,10 @@ const SocialStrip = () => {
           target={href.startsWith("mailto") ? "_self" : "_blank"}
           rel="noopener noreferrer"
           title={label}
-          className="group flex-shrink-0"
+          className="group flex-shrink-0 py-1"
           style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
         >
-          <span className="font-sans font-black text-[10px] tracking-[0.22em] uppercase text-white group-hover:opacity-100 transition-opacity duration-300">
+          <span className="font-sans font-black text-[10px] tracking-[0.22em] uppercase text-white/70 group-hover:text-white transition-colors duration-300">
             {label}
           </span>
         </a>
@@ -100,59 +114,72 @@ const SocialStrip = () => {
   );
 };
 
-const SpinningCTA = () => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.8 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-    className="absolute md:z-30 lg:z-10 hidden md:flex items-center justify-center"
-    style={{ bottom: "4rem", right: "4rem" }}
-  >
-    <style>{`
-      @keyframes ctaSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      .cta-ring { animation: ctaSpin var(--cta-spin-duration, 10s) linear infinite; transform-origin: center; }
-      .cta-wrap:hover .cta-ring { --cta-spin-duration: 3s; }
-      .cta-wrap { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-      .cta-wrap:hover { transform: scale(1.08); }
-    `}</style>
-    <a href="#contact" className="cta-wrap group relative flex items-center justify-center w-[130px] h-[130px]" aria-label="Get in touch">
-      <svg viewBox="0 0 130 130" className="absolute inset-0 w-full h-full pointer-events-none">
-        <circle cx="65" cy="65" r="62" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" />
-      </svg>
-      <svg viewBox="0 0 130 130" className="cta-ring absolute inset-0 w-full h-full pointer-events-none">
-        <defs>
-          <path id="cta-circle-path" d="M65,65 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0" />
-        </defs>
-        <text fill="rgba(255,255,255,1)" fontSize="8.5" fontFamily="'Inter', sans-serif" fontWeight="900" letterSpacing="4">
-          <textPath href="#cta-circle-path">GET IN TOUCH · GET IN TOUCH · GET IN TOUCH ·&nbsp;</textPath>
-        </text>
-      </svg>
-      <span className="absolute inset-4 rounded-full bg-white scale-0 group-hover:scale-100 transition-transform duration-500 ease-in-out" style={{ transformOrigin: "center" }} />
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="relative z-10 w-6 h-6 text-white group-hover:text-black" style={{ transition: "color 0.3s ease" }}>
-        <path d="M7 17L17 7M17 7H7M17 7v10" />
-      </svg>
-    </a>
-  </motion.div>
-);
+const SpinningCTA = () => {
+  const lenis = useLenis();
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className="absolute z-[45] hidden md:flex items-center justify-center pointer-events-auto"
+      style={{ top: "65%", left: "49%", transform: "translate(-50%, -50%)" }}
+    >
+      <style>{`
+        @keyframes ctaSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .cta-ring { animation: ctaSpin var(--cta-spin-duration, 10s) linear infinite; transform-origin: center; }
+        .cta-wrap:hover .cta-ring { --cta-spin-duration: 2.5s; }
+        .cta-wrap { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .cta-wrap:hover { transform: scale(1.12); }
+      `}</style>
+      <Magnetic strength={0.45}>
+        <a
+          href="#contact"
+          onClick={(e) => {
+            e.preventDefault();
+            lenis?.scrollTo("#contact");
+          }}
+          className="cta-wrap group relative flex items-center justify-center w-[125px] h-[125px] cursor-pointer"
+          aria-label="Get in touch"
+        >
+          <svg viewBox="0 0 130 130" className="absolute inset-0 w-full h-full pointer-events-none">
+            <circle cx="65" cy="65" r="62" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" />
+          </svg>
+          <svg viewBox="0 0 130 130" className="cta-ring absolute inset-0 w-full h-full pointer-events-none">
+            <defs>
+              <path id="cta-circle-path" d="M65,65 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0" />
+            </defs>
+            <text fill="rgba(255,255,255,1)" fontSize="8.5" fontFamily="'Inter', sans-serif" fontWeight="900" letterSpacing="4">
+              <textPath href="#cta-circle-path">GET IN TOUCH · GET IN TOUCH · GET IN TOUCH ·&nbsp;</textPath>
+            </text>
+          </svg>
+          <span className="absolute inset-4 rounded-full bg-white scale-0 group-hover:scale-100 transition-transform duration-500 ease-in-out" style={{ transformOrigin: "center" }} />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="relative z-10 w-6 h-6 text-white group-hover:text-black" style={{ transition: "color 0.3s ease" }}>
+            <path d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </a>
+      </Magnetic>
+    </motion.div>
+  );
+};
 
 const MobileSocialStrip = () => {
   const socials = [
-    { label: "Github", icon: Github, href: "https://github.com/MAHESHPPAI" },
-    { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/mahesh-p-pai-b0987b2a8/" },
-    { label: "Instagram", icon: Instagram, href: "https://www.instagram.com/mahesh_3.14_/" },
-    { label: "Email", icon: Mail, href: "mailto:maheshpailinked@gmail.com" },
+    { label: "Github", icon: Github, href: "https://github.com/SAHITYA350" },
+    { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/sahitya-ghosh-9ba098292/" },
+    { label: "LeetCode", icon: Code, href: "https://leetcode.com/balasur" },
+    { label: "Email", icon: Mail, href: "mailto:sahityaghosh350@gmail.com" },
   ];
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
-      className="flex flex-col items-center gap-6"
+      className="flex items-center gap-4 bg-white/10 border border-white/20 backdrop-blur-md px-4 py-2 rounded-full w-fit shadow-lg"
     >
       {socials.map(({ label, icon: Icon, href }) => (
         <a key={label} href={href} target={href.startsWith("mailto") ? "_self" : "_blank"} rel="noopener noreferrer"
-          className="text-white hover:opacity-75 transition-opacity duration-300 block">
-          <Icon size={18} strokeWidth={2.5} />
+          title={label} className="text-white hover:opacity-70 transition-opacity duration-300 block">
+          <Icon size={16} strokeWidth={2.2} />
         </a>
       ))}
     </motion.div>
@@ -160,96 +187,145 @@ const MobileSocialStrip = () => {
 };
 
 const Index = () => {
+  const lenis = useLenis();
   const footerContainerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: footerContainerRef,
     offset: ["start end", "end end"]
   });
 
-  // Create parallax effect: Footer starts higher up and moves to normal position as we scroll into it
   const footerY = useTransform(scrollYProgress, [0, 1], ["-50%", "0%"]);
 
   return (
-    <div className="min-h-screen relative bg-black selection:bg-white selection:text-black">
+    <div id="top" className="min-h-screen relative bg-black selection:bg-white selection:text-black">
+      <PagePreloader />
       <BrandLogo />
       <CursorFollower />
       <Navigation />
 
-      {/* Fixed background About section */}
       <div className="fixed inset-0 z-0 bg-white text-black">
         <About />
       </div>
 
-      {/* Hero */}
-      <section className="relative h-screen bg-black flex flex-col px-6 py-12 md:px-16 md:py-16 z-20 overflow-hidden">
+      <section id="home" data-ai="hero" className="relative min-h-screen bg-black flex flex-col justify-between px-6 pt-20 pb-12 sm:pt-24 md:px-16 md:pt-24 md:pb-16 z-20 overflow-x-hidden">
         <AvailabilityBadge />
         <SocialStrip />
         <SpinningCTA />
         <div className="hidden lg:block"><SplashCursor /></div>
 
-        {/* Mobile Midpoint Buffer: 80px total height from top to clear hamburger (Hamburger at 24px + 56px height) */}
-        <div className="h-[32px] w-full md:hidden" /> {/* py-12 (48px) + 32px = 80px */}
+        <div className="flex flex-wrap items-center justify-between gap-3 md:hidden z-10 my-2">
+          <a 
+            href="#contact" 
+            onClick={(e) => {
+              e.preventDefault();
+              lenis?.scrollTo("#contact");
+            }}
+            className="group relative overflow-hidden border border-white/30 px-4 py-2 flex items-center gap-2 hover:border-white transition-colors duration-500 rounded-full bg-white/5 backdrop-blur-md"
+          >
+            <span className="relative font-sans font-black text-[9px] tracking-[0.2em] uppercase text-white group-hover:text-black transition-colors duration-300 z-10">Get in touch</span>
+            <svg className="relative w-3 h-3 text-white group-hover:text-black transition-colors duration-300 z-10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M1 6h10M6 1l5 5-5 5" />
+            </svg>
+          </a>
+          <MobileSocialStrip />
+        </div>
 
-        {/* Dynamic Centering Container for Mobile Socials */}
-        <div className="flex-1 flex flex-col items-end justify-center md:hidden pr-0 z-10 pointer-events-none">
-          <div className="pointer-events-auto">
-            <MobileSocialStrip />
+        <div className="z-10 grid grid-cols-1 md:grid-cols-12 w-full gap-6 lg:gap-8 items-center flex-1 my-auto max-w-[1700px] mx-auto pt-4 md:pt-8 pr-0 md:pr-20 lg:pr-28">
+          
+          <div className="col-span-1 md:col-span-7 lg:col-span-7 flex flex-col justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <h1 className="font-sans font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.8rem] leading-[0.88] tracking-tighter text-white uppercase text-left">
+                AI & <br /> Full-Stack<br />Engineer
+              </h1>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              className="mt-5 md:mt-7 max-w-xl flex flex-col items-start gap-6 sm:gap-8"
+            >
+              <div>
+                <div className="w-12 h-[2px] bg-white mb-4 md:hidden" />
+                <p className="font-sans text-xs sm:text-sm md:text-base font-medium text-white/90 leading-relaxed tracking-wide uppercase text-left">
+                  Building production-ready RAG pipelines, Agentic AI workflows, distributed microservices, and modern scalable SaaS applications.
+                </p>
+              </div>
+
+              {/* Magnetic RESUME Button */}
+              <Magnetic strength={0.22}>
+                <a
+                  href="/resume.jpeg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative overflow-hidden border-2 border-white/20 px-6 py-3.5 flex items-center gap-2 hover:border-white transition-all duration-500 rounded-full bg-white/5 backdrop-blur-md font-sans font-bold text-xs tracking-[0.22em] uppercase text-white shadow-lg"
+                >
+                  <span className="relative z-10">Resume</span>
+                  <svg className="relative z-10 w-3.5 h-3.5 text-white/70 group-hover:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M7 17L17 7M17 7H7M17 7v10" />
+                  </svg>
+                </a>
+              </Magnetic>
+            </motion.div>
           </div>
-        </div>
 
-        <div className="z-10 mt-auto mb-6 md:mb-8">
           <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="w-fit"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="col-span-1 md:col-span-5 lg:col-span-5 flex justify-center md:justify-center items-center mt-4 md:mt-0"
           >
-            <a href="#contact" className="group relative overflow-hidden border border-white/30 px-5 py-3 flex items-center gap-3 hover:border-white transition-colors duration-500 w-fit mb-6 md:hidden">
-              <span className="absolute inset-0 bg-white translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-in-out" />
-              <span className="relative font-sans font-black text-[10px] tracking-[0.25em] uppercase text-white group-hover:text-black transition-colors duration-300 z-10">Get in touch</span>
-              <svg className="relative w-3 h-3 text-white group-hover:text-black transition-colors duration-300 z-10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M1 6h10M6 1l5 5-5 5" />
-              </svg>
-            </a>
-            <h1 className="font-sans font-bold text-7xl md:text-8xl lg:text-[9rem] xl:text-[11rem] leading-[0.85] tracking-tighter text-white uppercase text-left">
-              Driven<br />by logic
-            </h1>
-          </motion.div>
-        </div>
-
-        <div className="z-10 grid grid-cols-1 md:grid-cols-12 w-full gap-4 mb-8 md:mb-0">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="col-span-1 md:col-span-5 lg:col-span-4"
-          >
-            <div className="w-12 h-[2px] bg-white mb-6 md:hidden" />
-            <p className="font-sans text-xs md:text-sm font-medium text-white leading-relaxed tracking-wide uppercase text-left">
-              Building robust software, automating the complex and focused on transforming static systems into intelligent ones.
-            </p>
+            <div className="relative group w-48 h-64 sm:w-56 sm:h-76 md:w-60 md:h-[22rem] lg:w-[20rem] lg:h-[26rem] xl:w-[22rem] xl:h-[28rem] rounded-3xl overflow-hidden border-2 border-white/40 bg-[#0e0e0e]/70 shadow-[14px_14px_0px_0px_rgba(255,255,255,0.85)] hover:shadow-[20px_20px_0px_0px_rgba(255,255,255,1)] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-500 cursor-pointer shrink-0">
+              <img
+                src="/me.jpg"
+                alt="Sahitya Ghosh"
+                className="w-full h-full object-cover object-top grayscale contrast-115 transition-all duration-700 ease-out transform group-hover:grayscale-0 group-hover:scale-105"
+              />
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Content stack */}
+      <HeroImgHolder />
+
       <div className="relative z-20 w-full bg-transparent">
         <div id="about" className="h-screen w-full pointer-events-none" />
 
-        <div id="work" className="bg-black text-white relative z-20">
+        <div id="work" data-ai="projects" className="bg-black text-white relative z-20">
           <SelectedWorks />
         </div>
 
-        <div className="bg-white text-black relative z-20">
+        <div data-ai="skills-philosophy" className="bg-white text-black relative z-20">
           <VectorBridge />
         </div>
+
+        <WhatIDo />
+
+        <Certificates />
+
+        <div className="scroll-velocity-wrapper relative z-20">
+          <ScrollVelocity
+            texts={[
+              "Faster Delivery ➔ Faster Delivery ➔ Faster Delivery ➔",
+              "Scalable Products ❇ Scalable Products ❇ Scalable Products ❇",
+              "Reliable Systems ✦ Reliable Systems ✦ Reliable Systems ✦"
+            ]}
+            velocity={75}
+          />
+        </div>
+
+        <CodeShipRepeat />
 
         <div className="bg-black text-white relative z-20">
           <Testimonial />
         </div>
 
         {/* Change contact layer to z-20 and relative so it scrolls normally OVER the footer */}
-        <div id="contact" className="relative z-20 bg-white text-black">
+        <div id="contact" data-ai="contact" className="relative z-20 bg-white text-black">
           <Contact />
         </div>
       </div>
@@ -260,6 +336,9 @@ const Index = () => {
           <Footer />
         </motion.div>
       </div>
+
+      {/* Floating Ephemeral RAG AI Chat Widget */}
+      <AIChatWidget />
     </div>
   );
 };

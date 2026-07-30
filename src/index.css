@@ -59,7 +59,7 @@
     --sidebar-ring: 0 0% 8%;
 
     /* Typography */
-    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-serif: 'Inter', system-ui, sans-serif;
     --font-sans: 'Inter', system-ui, sans-serif;
 
     /* Spacing */
@@ -171,3 +171,103 @@
     @apply italic;
   }
 }
+
+/* Footer Particle Explosion Styles */
+footer .explosion-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+footer .explosion-particle-img {
+  position: absolute;
+  bottom: -200px;
+  left: 50%;
+  width: 150px;
+  border-radius: 1rem;
+  height: auto;
+  object-fit: cover;
+  transform: translateX(-50%);
+  will-change: transform;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 1000px) {
+  footer .explosion-container {
+    display: none;
+  }
+}
+
+/* ========== CUSTOM SLEEK SCROLLBAR SYSTEM ========== */
+
+/* Global custom scrollbar for desktop */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Hide native scrollbar on mobile/tablet devices site-wide while preserving touch inertia scroll */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    display: none;
+  }
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Premium Transparent Custom Scrollbar for Navigation Menu Overlay */
+.menu-overlay-scroller {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.menu-overlay-scroller::-webkit-scrollbar {
+  width: 4px;
+}
+
+.menu-overlay-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu-overlay-scroller::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  transition: background 0.3s ease;
+}
+
+.menu-overlay-scroller::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+@media (max-width: 768px) {
+  .menu-overlay-scroller {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  .menu-overlay-scroller::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+  }
+}

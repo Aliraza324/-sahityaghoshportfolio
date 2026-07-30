@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import MagneticButton from "./MagneticButton";
+import { useLenis } from "lenis/react";
 
 interface NavItem {
   label: string;
@@ -13,17 +15,20 @@ interface SocialItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "About", href: "#about", number: "01" },
-  { label: "Work", href: "#work", number: "02" },
-  { label: "Philosophy", href: "#philosophy", number: "03" },
-  { label: "Contact", href: "#contact", number: "04" },
+  { label: "Home", href: "#top", number: "01" },
+  { label: "About", href: "#about", number: "02" },
+  { label: "Work", href: "#work", number: "03" },
+  { label: "What I Do", href: "#what-i-do", number: "04" },
+  { label: "Philosophy", href: "#philosophy", number: "05" },
+  { label: "Credentials", href: "#credentials", number: "06" },
+  { label: "Contact", href: "#contact", number: "07" },
 ];
 
 const socialItems: SocialItem[] = [
-  { label: "GitHub", href: "https://github.com/MAHESHPPAI" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/mahesh-p-pai-b0987b2a8/" },
-  { label: "Instagram", href: "https://www.instagram.com/mahesh_3.14_/" },
-  { label: "Email", href: "mailto:maheshpailinked@gmail.com" },
+  { label: "GitHub", href: "https://github.com/SAHITYA350" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/sahitya-ghosh-9ba098292/" },
+  { label: "LeetCode", href: "https://leetcode.com/balasur" },
+  { label: "Email", href: "mailto:sahityaghosh350@gmail.com" },
 ];
 
 const ease = [0.76, 0, 0.24, 1] as [number, number, number, number];
@@ -76,40 +81,58 @@ const socialVariants: Variants = {
 
 const Navigation = () => {
   const [open, setOpen] = useState(false);
+  const lenis = useLenis();
 
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
-      document.body.style.touchAction = "none"; // Critical for iOS Safari
+      lenis?.stop();
     } else {
       document.body.style.overflow = "";
-      document.body.style.touchAction = "";
+      lenis?.start();
     }
     return () => {
       document.body.style.overflow = "";
-      document.body.style.touchAction = "";
+      lenis?.start();
     };
-  }, [open]);
+  }, [open, lenis]);
 
-  const handleNavClick = () => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     setOpen(false);
+    document.body.style.overflow = "";
+    lenis?.start();
+
+    setTimeout(() => {
+      if (href === "#top" || href === "#home" || href === "#") {
+        lenis?.scrollTo(0);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        const target = document.querySelector(href);
+        if (target) {
+          lenis?.scrollTo(target as HTMLElement);
+        } else {
+          lenis?.scrollTo(href);
+        }
+      }
+    }, 50);
   };
 
   return (
     <>
-      {/* Hamburger Button */}
+      {/* Hamburger Button with Magnetic Inner Icon Attraction */}
       <div
         className="fixed top-6 right-6 md:top-8 md:right-10 z-[200]"
         style={{ transform: "translateZ(0)", willChange: "transform" }}
       >
-        <button
+        <MagneticButton
           onClick={() => setOpen((v) => !v)}
-          className="flex flex-col items-center justify-center gap-[5px] w-14 h-14 md:w-16 md:h-16 rounded-full bg-black transition-colors duration-300 relative"
+          className="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-black transition-colors duration-300 relative cursor-pointer"
           style={{
             boxShadow: "0 0 0 1px rgba(255, 255, 255, 0.6)",
             WebkitFontSmoothing: "antialiased",
           }}
-          aria-label={open ? "Close menu" : "Open menu"}
+          ariaLabel={open ? "Close menu" : "Open menu"}
         >
           {/* Top Line */}
           <motion.span
@@ -132,7 +155,7 @@ const Navigation = () => {
             className="absolute block h-[1.5px] w-[22px] bg-white origin-center"
             style={{ bottom: "35%" }}
           />
-        </button>
+        </MagneticButton>
       </div>
 
       <AnimatePresence>
@@ -143,11 +166,12 @@ const Navigation = () => {
             initial="closed"
             animate="open"
             exit="closed"
-            className="fixed inset-0 z-[100] bg-black flex flex-col justify-between px-8 md:px-16 pt-16 pb-10 md:pt-20 md:pb-14"
+            data-lenis-prevent
+            className="fixed inset-0 z-[100] bg-black flex flex-col justify-between px-6 sm:px-8 md:px-16 pt-16 pb-8 md:pt-20 md:pb-14 overflow-y-auto menu-overlay-scroller"
           >
             {/* Socials row */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-4 pt-10 md:pt-0">
-              <p className="text-sm text-white/70 uppercase tracking-widest font-mono mr-2">
+            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 mb-4 pt-10 md:pt-0">
+              <p className="text-xs sm:text-sm text-white/70 uppercase tracking-widest font-mono mr-1 sm:mr-2">
                 Socials
               </p>
               {socialItems.map((item, i) => (
@@ -161,7 +185,7 @@ const Navigation = () => {
                   initial="closed"
                   animate="open"
                   exit="closed"
-                  className="text-base md:text-lg font-medium text-white hover:opacity-40"
+                  className="text-sm sm:text-base md:text-lg font-medium text-white hover:opacity-40"
                 >
                   {item.label}
                 </motion.a>
@@ -169,7 +193,7 @@ const Navigation = () => {
             </div>
 
             {/* Nav Links */}
-            <nav className="flex flex-col gap-0">
+            <nav className="flex flex-col gap-0 py-8 md:py-12">
               {navItems.map((item, i) => (
                 <div
                   key={item.label}
@@ -177,18 +201,18 @@ const Navigation = () => {
                 >
                   <motion.a
                     href={item.href}
-                    onClick={handleNavClick}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     custom={i}
                     variants={itemVariants}
                     initial="closed"
                     animate="open"
                     exit="closed"
-                    className="flex items-baseline justify-between group cursor-pointer"
+                    className="flex items-baseline justify-between group cursor-pointer gap-2"
                   >
-                    <span className="text-5xl md:text-7xl lg:text-8xl font-semibold text-white uppercase tracking-tight leading-none group-hover:translate-x-3 transition-transform duration-300 ease-out">
+                    <span className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold text-white uppercase tracking-tight leading-none group-hover:translate-x-3 transition-transform duration-300 ease-out truncate">
                       {item.label}
                     </span>
-                    <span className="text-xs text-white/55 font-mono tracking-widest self-start mt-2">
+                    <span className="text-[10px] sm:text-xs text-white/55 font-mono tracking-widest self-start mt-1 shrink-0">
                       {item.number}
                     </span>
                   </motion.a>
@@ -203,7 +227,7 @@ const Navigation = () => {
               exit={{ opacity: 0, transition: { duration: 0.6 } }}
               className="text-xs text-white/20 font-mono tracking-widest mt-8 md:mt-0 md:self-end"
             >
-              © 2026 MAHESH
+              © 2026 SAHITYA GHOSH
             </motion.p>
           </motion.div>
         )}

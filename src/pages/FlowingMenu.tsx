@@ -31,47 +31,65 @@ const MenuItem: React.FC<MenuItemData & { speed: number; marqueeBgColor: string;
   const itemRef = useRef<HTMLDivElement>(null);
   const marqueeInnerRef = useRef<HTMLDivElement>(null);
   const [repetitions, setRepetitions] = useState(2);
-  
-  // Local state: Only affects THIS specific menu item
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
+  // Calculate repetitions based on screen width
   useEffect(() => {
     const calculate = () => {
       if (!marqueeInnerRef.current) return;
       const part = marqueeInnerRef.current.querySelector('.marquee__part') as HTMLElement;
-      if (part) {
+      if (part && part.offsetWidth > 0) {
         setRepetitions(Math.ceil(window.innerWidth / part.offsetWidth) + 2);
       }
     };
-    calculate();
+    
+    // Slight delay to ensure fonts/layout are settled
+    const timer = setTimeout(calculate, 100);
     window.addEventListener('resize', calculate);
-    return () => window.removeEventListener('resize', calculate);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', calculate);
+    };
   }, [items]);
 
+  // GSAP Animation - Cleaned up for performance
   useEffect(() => {
     if (!marqueeInnerRef.current) return;
     const part = marqueeInnerRef.current.querySelector('.marquee__part') as HTMLElement;
-    if (!part) return;
+    if (!part || part.offsetWidth === 0) return;
+
+    // Normalize speed so it's not too fast on small screens
+    const baseSpeed = window.innerWidth < 640 ? 60 : 200;
+    const duration = (part.offsetWidth / baseSpeed) * speed;
 
     const ctx = gsap.context(() => {
-      gsap.to(marqueeInnerRef.current, {
-        x: -(part.offsetWidth), 
-        duration: (part.offsetWidth / 200) * speed,
+      const tween = gsap.to(marqueeInnerRef.current, {
+        x: -part.offsetWidth, 
+        duration: duration,
         ease: 'none',
-        repeat: -1
+        repeat: -1,
+        force3D: true // Hardware acceleration
       });
+
+      // Play animation if menu item is open (clicked on mobile) OR hovered (desktop)
+      if (isOpen || isHovered) {
+        tween.play();
+      } else {
+        tween.pause();
+      }
+      
+      return () => tween.kill();
     }, marqueeInnerRef);
 
     return () => ctx.revert();
-  }, [items, repetitions, speed]);
+  }, [items, repetitions, speed, isOpen, isHovered]);
 
-  // 1. Handle clicking the TEXT (Opens the menu)
   const handleTextClick = (e: React.MouseEvent) => {
     e.preventDefault(); 
     setIsOpen(!isOpen); 
   };
 
-  // 2. Handle clicking the MARQUEE (Closes the menu)
   const handleMarqueeClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation(); 
@@ -83,16 +101,16 @@ const MenuItem: React.FC<MenuItemData & { speed: number; marqueeBgColor: string;
       className={`menu__item ${isOpen ? 'is-open' : ''}`} 
       ref={itemRef} 
       style={{ borderTop: isFirst ? 'none' : '1px solid black' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <a 
         className="menu__item-link" 
         href={link}
         onClick={handleTextClick}
       >
-        {/* Main Text */}
         <span className="menu__item-text">{text}</span>
         
-        {/* 45 Degree Arrow Icon */}
         <svg 
           viewBox="0 0 24 24" 
           fill="none" 
@@ -100,14 +118,13 @@ const MenuItem: React.FC<MenuItemData & { speed: number; marqueeBgColor: string;
           strokeWidth="2.5" 
           strokeLinecap="round" 
           strokeLinejoin="round" 
-          className="menu__item-arrow"
+          className={`menu__item-arrow ${isOpen ? 'is-flipped' : ''}`}
         >
           <line x1="7" y1="17" x2="17" y2="7"></line>
           <polyline points="7 7 17 7 17 17"></polyline>
         </svg>
       </a>
       
-      {/* The scrolling banner */}
       <div 
         className="marquee" 
         style={{ backgroundColor: marqueeBgColor }}
@@ -118,7 +135,7 @@ const MenuItem: React.FC<MenuItemData & { speed: number; marqueeBgColor: string;
             <div className="marquee__part" key={i}>
               {items.map((skill, idx) => (
                 <div key={idx} className="marquee__icon-box">
-                  <img src={skill.url} alt={skill.name} className="marquee__icon" />
+                  <img src={skill.url} alt={skill.name} className="marquee__icon" loading="eager" decoding="async" />
                   <span className="marquee__text">{skill.name}</span>
                 </div>
               ))}
