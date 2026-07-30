@@ -63,17 +63,43 @@ const BrandLogo = () => (
 
 const AvailabilityBadge = () => (
   <motion.div
-    initial={{ opacity: 0, y: -20 }}
+    initial={{ opacity: 0, y: -15 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-    className="hidden lg:flex items-center gap-2 absolute top-8 left-1/2 -translate-x-1/2 z-20 border border-white/20 bg-white/5 backdrop-blur-sm px-3 py-1.5 rounded-full"
+    transition={{ duration: 0.5 }}
+    className="
+      absolute z-20
+
+      /* Mobile */
+      top-20 left-1/2 -translate-x-1/2
+
+      /* Tablet/Desktop */
+      sm:top-6 sm:left-1/2 sm:-translate-x-1/2
+      lg:top-8
+
+      flex items-center justify-center
+
+      rounded-full
+      border border-white/15
+      bg-white/5
+      backdrop-blur-xl
+
+      px-4 py-2
+      sm:px-5 sm:py-2.5
+      lg:px-6 lg:py-3
+    "
   >
-    <span className="relative flex h-1.5 w-1.5">
+    <span className="relative flex h-1.5 w-1.5 mr-2 shrink-0">
       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-400" />
     </span>
-    <span className="font-sans font-black text-[9px] tracking-[0.25em] uppercase text-white">
-      Available for work
+    <span
+      className="font-sans font-black uppercase text-white whitespace-nowrap"
+      style={{
+        fontSize: "clamp(0.55rem, 1.2vw, 0.85rem)",
+        letterSpacing: "0.22em",
+      }}
+    >
+      AVAILABLE FOR WORK
     </span>
   </motion.div>
 );
@@ -207,7 +233,7 @@ const Index = () => {
         <About />
       </div>
 
-      <section id="home" data-ai="hero" className="relative min-h-screen bg-black flex flex-col justify-between px-6 pt-20 pb-12 sm:pt-24 md:px-16 md:pt-24 md:pb-16 z-20 overflow-x-hidden">
+      <section id="home" data-ai="hero" className="relative min-h-screen bg-black flex flex-col justify-between px-6 pt-32 pb-12 sm:pt-24 md:px-16 md:pt-24 md:pb-16 z-20 overflow-x-hidden">
         <AvailabilityBadge />
         <SocialStrip />
         <SpinningCTA />
