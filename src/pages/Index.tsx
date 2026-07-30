@@ -66,32 +66,8 @@ const AvailabilityBadge = () => (
     initial={{ opacity: 0, y: -15 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="
-      absolute z-20
-
-      /* Mobile */
-      top-20 left-1/2 -translate-x-1/2
-
-      /* Tablet/Desktop */
-      sm:top-6 sm:left-1/2 sm:-translate-x-1/2
-      lg:top-8
-
-      flex items-center justify-center
-
-      rounded-full
-      border border-white/15
-      bg-white/5
-      backdrop-blur-xl
-
-      px-4 py-2
-      sm:px-5 sm:py-2.5
-      lg:px-6 lg:py-3
-    "
+    className="relative sm:absolute z-20 w-fit sm:w-auto sm:top-6 sm:left-1/2 sm:-translate-x-1/2 flex items-center justify-center rounded-full border border-white/15 bg-white/5 backdrop-blur-xl px-4 py-2 sm:px-5 sm:py-2.5 lg:px-6 lg:py-3 mb-2 sm:mb-0"
   >
-    <span className="relative flex h-1.5 w-1.5 mr-2 shrink-0">
-      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-400" />
-    </span>
     <span
       className="font-sans font-black uppercase text-white whitespace-nowrap"
       style={{
@@ -200,12 +176,12 @@ const MobileSocialStrip = () => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
-      className="flex items-center gap-4 bg-white/10 border border-white/20 backdrop-blur-md px-4 py-2 rounded-full w-fit shadow-lg"
+      className="flex items-center gap-2 sm:gap-4 bg-white/10 border border-white/20 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-full w-fit shadow-lg"
     >
       {socials.map(({ label, icon: Icon, href }) => (
         <a key={label} href={href} target={href.startsWith("mailto") ? "_self" : "_blank"} rel="noopener noreferrer"
           title={label} className="text-white hover:opacity-70 transition-opacity duration-300 block">
-          <Icon size={16} strokeWidth={2.2} />
+          <Icon size={14} className="sm:w-4 sm:h-4" strokeWidth={2.2} />
         </a>
       ))}
     </motion.div>
@@ -233,20 +209,20 @@ const Index = () => {
         <About />
       </div>
 
-      <section id="home" data-ai="hero" className="relative min-h-screen bg-black flex flex-col justify-between px-6 pt-32 pb-12 sm:pt-24 md:px-16 md:pt-24 md:pb-16 z-20 overflow-x-hidden">
+      <section id="home" data-ai="hero" className="relative min-h-screen bg-black flex flex-col justify-between px-6 pt-20 pb-12 sm:pt-24 md:px-16 md:pt-24 md:pb-16 z-20 overflow-x-hidden">
         <AvailabilityBadge />
         <SocialStrip />
         <SpinningCTA />
         <div className="hidden lg:block"><SplashCursor /></div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 md:hidden z-10 my-2">
+        <div className="flex items-center gap-2 md:hidden z-10 my-2 w-full justify-between sm:justify-start">
           <a 
             href="#contact" 
             onClick={(e) => {
               e.preventDefault();
               lenis?.scrollTo("#contact");
             }}
-            className="group relative overflow-hidden border border-white/30 px-4 py-2 flex items-center gap-2 hover:border-white transition-colors duration-500 rounded-full bg-white/5 backdrop-blur-md"
+            className="group relative overflow-hidden border border-white/30 px-3 py-1.5 sm:px-4 sm:py-2 flex items-center gap-1.5 sm:gap-2 hover:border-white transition-colors duration-500 rounded-full bg-white/5 backdrop-blur-md"
           >
             <span className="relative font-sans font-black text-[9px] tracking-[0.2em] uppercase text-white group-hover:text-black transition-colors duration-300 z-10">Get in touch</span>
             <svg className="relative w-3 h-3 text-white group-hover:text-black transition-colors duration-300 z-10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2.5">
