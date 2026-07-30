@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Calendar, Video, Clock, Globe, Check, ArrowRight, ExternalLink, User, Mail, ShieldCheck, Copy, CheckCheck } from "lucide-react";
 
@@ -166,7 +167,33 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
 
   const fullJitsiUrl = `https://meet.jit.si/${jitsiRoomName}${jitsiEmbedFlags}`;
 
-  return (
+  const handleJoinInstantCall = () => {
+    try {
+      fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: {
+            first_name: "Instant Visitor",
+            last_name: "(Live Video Call)",
+            email: "instant-call@portfolio.dev",
+            to_email: "sahityaghosh350@gmail.com",
+            subject: `🚨 Instant Video Call Alert: Visitor Waiting in Room!`,
+            message: `A visitor just clicked to start an Instant 1-on-1 Video Call with you from your live portfolio!\n\nRoom ID: ${jitsiRoomName}\n\nDirect Live Meeting Join Link:\n${fullJitsiUrl}\n\nPlease click the link above immediately to enter the video room and meet your visitor!`,
+          },
+        }),
+      });
+    } catch (err) {
+      console.warn("EmailJS instant call notification error:", err);
+    }
+  };
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <div 
@@ -515,6 +542,7 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
                       href={fullJitsiUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={handleJoinInstantCall}
                       className="w-full sm:w-auto px-5 py-3 sm:py-3.5 rounded-xl bg-white text-black font-mono text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-white/90 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg"
                     >
                       <Video className="w-4 h-4" />
@@ -535,6 +563,7 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };

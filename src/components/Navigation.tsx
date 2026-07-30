@@ -167,10 +167,10 @@ const Navigation = () => {
             animate="open"
             exit="closed"
             data-lenis-prevent
-            className="fixed inset-0 z-[100] bg-black flex flex-col justify-between px-6 sm:px-8 md:px-16 pt-16 pb-8 md:pt-20 md:pb-14 overflow-y-auto menu-overlay-scroller"
+            className="fixed inset-0 z-[100] bg-black flex flex-col justify-start md:justify-between px-6 sm:px-8 md:px-16 pt-20 pb-8 md:pt-20 md:pb-14 overflow-y-auto menu-overlay-scroller gap-6 md:gap-0"
           >
             {/* Socials row */}
-            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 mb-4 pt-10 md:pt-0">
+            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 pt-14 md:pt-0 mb-2 md:mb-4">
               <p className="text-xs sm:text-sm text-white/70 uppercase tracking-widest font-mono mr-1 sm:mr-2">
                 Socials
               </p>
@@ -193,7 +193,7 @@ const Navigation = () => {
             </div>
 
             {/* Nav Links */}
-            <nav className="flex flex-col gap-0 py-8 md:py-12">
+            <nav className="flex flex-col gap-0.5 py-4 md:py-12">
               {navItems.map((item, i) => (
                 <div
                   key={item.label}

@@ -211,10 +211,105 @@ const SelectedWorks = () => {
     const containerHeight = window.innerHeight;
     const firstCardHeight = cards[0].offsetHeight;
 
-    const isMobile = window.innerWidth <= 768;
-    const stackPositionPx = isMobile
-      ? Math.max(88, (containerHeight - firstCardHeight) / 2)
-      : (containerHeight - firstCardHeight) / 2;
+    const isMobileViewport = window.innerWidth < 1024;
+
+    if (isMobileViewport) {
+      // 1. Reset card transforms on mobile so they scroll naturally and do not shake/lag
+      cards.forEach((card) => {
+        card.style.transform = "";
+      });
+
+      // 2. Compute progress for scroll animations (ribbon and kinetic text)
+      const stackPositionPx = Math.max(88, (containerHeight - firstCardHeight) / 2);
+      const scaleEndPositionPx = stackPositionPx - (BASE_CONFIG.stackPosition - BASE_CONFIG.scaleEndPosition) * containerHeight;
+      const lastCardTop = cardOffsets[cards.length - 1];
+      const triggerEndLast = lastCardTop - scaleEndPositionPx;
+
+      const voidStart = triggerEndLast;
+      const voidDistance = containerHeight * 1.2;
+      let voidProgress = 0;
+
+      if (scroll > voidStart) {
+        voidProgress = (scroll - voidStart) / voidDistance;
+        voidProgress = Math.min(Math.max(voidProgress, 0), 1);
+      }
+
+      // Animate S-Curve ribbon
+      const thread = threadPathRef.current;
+      const threadLen = threadLenRef.current;
+      if (thread && threadLen > 0) {
+        let drawP = 0;
+        if (voidProgress > 0.2) {
+          drawP = (voidProgress - 0.2) / 0.8;
+        }
+        drawP = Math.min(Math.max(drawP, 0), 1);
+        thread.style.strokeDasharray = `${threadLen}`;
+        thread.style.strokeDashoffset = `${(threadLen * (1 - drawP)).toFixed(2)}`;
+
+        const animateText = (ref: React.RefObject<SVGTextElement>, targetP: number) => {
+          if (!ref.current) return;
+          const threshold = 0.15;
+          const dist = Math.abs(drawP - targetP);
+          let intensity = 0;
+          if (dist < threshold) {
+            intensity = 1 - (dist / threshold);
+          }
+          const opacity = 0.3 + (0.7 * intensity);
+          const scale = 1 + (0.05 * intensity);
+          ref.current.style.opacity = opacity.toFixed(2);
+          ref.current.style.transform = `scale(${scale})`;
+          ref.current.style.transformOrigin = 'center';
+          ref.current.style.transformBox = 'fill-box';
+        };
+
+        animateText(textAnalyzeRef, 0.04);
+        animateText(textDesignRef, 0.20);
+        animateText(textBuildRef, 0.40);
+        animateText(textDeliverRef, 0.60);
+      }
+
+      // Animate kinetic wheel display/visibility
+      const kineticWheel = kineticWheelRef.current;
+      if (kineticWheel) {
+        if (scroll > endElementTop + containerHeight * 1.2 + containerHeight * 0.2) {
+          kineticWheel.style.display = 'none';
+          kineticWheel.style.visibility = 'hidden';
+        } else if (voidProgress > 0) {
+          kineticWheel.style.display = 'block';
+          kineticWheel.style.visibility = 'visible';
+
+          let figOpacity = 0;
+          if (voidProgress <= 0.25) {
+            figOpacity = 0.5 * (voidProgress / 0.25);
+          } else if (voidProgress <= 0.5) {
+            figOpacity = 0.5 + 0.5 * ((voidProgress - 0.25) / 0.25);
+          } else {
+            figOpacity = 1;
+          }
+
+          kineticWheel.style.opacity = figOpacity.toFixed(3);
+          kineticWheel.style.transform = `translate3d(0, 0, 0)`;
+
+          if (figureGroupRef.current) {
+            if (voidProgress >= 0.8) {
+              const textFade = 1 - ((voidProgress - 0.8) / 0.2);
+              figureGroupRef.current.style.opacity = Math.max(0, textFade).toFixed(3);
+            } else {
+              figureGroupRef.current.style.opacity = '1';
+            }
+          }
+        } else {
+          kineticWheel.style.display = 'block';
+          kineticWheel.style.opacity = '0';
+          kineticWheel.style.visibility = 'hidden';
+          kineticWheel.style.transform = `translate3d(0, 0, 0)`;
+          if (figureGroupRef.current) figureGroupRef.current.style.opacity = '1';
+        }
+      }
+      return;
+    }
+
+    const stackPositionPx = (containerHeight - firstCardHeight) / 2;
     const scaleEndPositionPx = stackPositionPx - (BASE_CONFIG.stackPosition - BASE_CONFIG.scaleEndPosition) * containerHeight;
 
     const lastCardTop = cardOffsets[cards.length - 1];
@@ -267,34 +362,19 @@ const SelectedWorks = () => {
       stackInner.style.perspectiveOrigin = `50% ${originY}px`;
 
       if (voidProgress > 0) {
-        if (isMobile) {
-          const fadeOutProgress = Math.min(voidProgress / 0.25, 1);
-          const currentOpacity = 1 - fadeOutProgress;
+        const easeScale = Math.pow(voidProgress, 1.5);
+        const currentZ = -easeScale * 3000;
+        const currentScale = 1 - easeScale;
+        const currentOpacity = 1 - Math.pow(voidProgress, 2.5);
 
-          voidContainer.style.transformOrigin = `50% ${originY}px`;
-          voidContainer.style.transform = `translate3d(0, 0, 0) scale(1)`;
-          voidContainer.style.opacity = Math.max(0, currentOpacity).toFixed(3);
+        voidContainer.style.transformOrigin = `50% ${originY}px`;
+        voidContainer.style.transform = `translate3d(0, 0, ${currentZ}px) scale(${Math.max(0, currentScale).toFixed(4)})`;
+        voidContainer.style.opacity = Math.max(0, currentOpacity).toFixed(3);
 
-          if (fadeOutProgress >= 1) {
-            voidContainer.style.visibility = 'hidden';
-          } else {
-            voidContainer.style.visibility = 'visible';
-          }
+        if (voidProgress >= 1) {
+          voidContainer.style.visibility = 'hidden';
         } else {
-          const easeScale = Math.pow(voidProgress, 1.5);
-          const currentZ = -easeScale * 3000;
-          const currentScale = 1 - easeScale;
-          const currentOpacity = 1 - Math.pow(voidProgress, 2.5);
-
-          voidContainer.style.transformOrigin = `50% ${originY}px`;
-          voidContainer.style.transform = `translate3d(0, 0, ${currentZ}px) scale(${Math.max(0, currentScale).toFixed(4)})`;
-          voidContainer.style.opacity = Math.max(0, currentOpacity).toFixed(3);
-
-          if (voidProgress >= 1) {
-            voidContainer.style.visibility = 'hidden';
-          } else {
-            voidContainer.style.visibility = 'visible';
-          }
+          voidContainer.style.visibility = 'visible';
         }
       } else {
         voidContainer.style.transformOrigin = '';
@@ -307,42 +387,6 @@ const SelectedWorks = () => {
     const thread = threadPathRef.current;
     const threadLen = threadLenRef.current;
 
-    if (thread && threadLen > 0 && isMobile) {
-      let drawP = 0;
-      if (voidProgress > 0.2) {
-        drawP = (voidProgress - 0.2) / 0.8;
-      }
-      drawP = Math.min(Math.max(drawP, 0), 1);
-      thread.style.strokeDasharray = `${threadLen}`;
-      thread.style.strokeDashoffset = `${(threadLen * (1 - drawP)).toFixed(2)}`;
-
-      // Flashlight Typography Animation
-      const animateText = (ref: React.RefObject<SVGTextElement>, targetP: number) => {
-        if (!ref.current) return;
-        const threshold = 0.15; // Width of the "flashlight" beam
-        const dist = Math.abs(drawP - targetP);
-        let intensity = 0;
-
-        if (dist < threshold) {
-          intensity = 1 - (dist / threshold); // Scales from 0 to 1 based on proximity
-        }
-
-        const opacity = 0.3 + (0.7 * intensity); // Base 30% opacity, flares to 100%
-        const scale = 1 + (0.05 * intensity); // Slight pop in size
-
-        ref.current.style.opacity = opacity.toFixed(2);
-        ref.current.style.transform = `scale(${scale})`;
-        ref.current.style.transformOrigin = 'center';
-        ref.current.style.transformBox = 'fill-box';
-      };
-
-      // Recalibrated thresholds for the new S-Curve ribbon
-      animateText(textAnalyzeRef, 0.04);
-      animateText(textDesignRef, 0.20);
-      animateText(textBuildRef, 0.40);
-      animateText(textDeliverRef, 0.60);
-    }
-
     const kineticWheel = kineticWheelRef.current;
     if (kineticWheel) {
       if (scroll > endElementTop + containerHeight * 1.2 + containerHeight * 0.2) {
@@ -351,44 +395,15 @@ const SelectedWorks = () => {
       } else if (voidProgress > 0) {
         kineticWheel.style.display = 'block';
         kineticWheel.style.visibility = 'visible';
-
-        if (isMobile) {
-          let figOpacity = 0;
-          if (voidProgress <= 0.25) {
-            figOpacity = 0.5 * (voidProgress / 0.25);
-          } else if (voidProgress <= 0.5) {
-            figOpacity = 0.5 + 0.5 * ((voidProgress - 0.25) / 0.25);
-          } else {
-            figOpacity = 1;
-          }
-
-          kineticWheel.style.opacity = figOpacity.toFixed(3);
-          kineticWheel.style.transform = `translate3d(0, 0, 0)`;
-
-          if (figureGroupRef.current) {
-            if (voidProgress >= 0.8) {
-              const textFade = 1 - ((voidProgress - 0.8) / 0.2);
-              figureGroupRef.current.style.opacity = Math.max(0, textFade).toFixed(3);
-            } else {
-              figureGroupRef.current.style.opacity = '1';
-            }
-          }
-        } else {
-          kineticWheel.style.opacity = Math.min(voidProgress * 4, 1).toFixed(3);
-          const targetRotation = 180 * (1 - voidProgress);
-          kineticWheel.style.transformOrigin = '50% 100%';
-          kineticWheel.style.transform = `rotate(${targetRotation}deg)`;
-        }
+        kineticWheel.style.opacity = Math.min(voidProgress * 4, 1).toFixed(3);
+        const targetRotation = 180 * (1 - voidProgress);
+        kineticWheel.style.transformOrigin = '50% 100%';
+        kineticWheel.style.transform = `rotate(${targetRotation}deg)`;
       } else {
         kineticWheel.style.display = 'block';
         kineticWheel.style.opacity = '0';
         kineticWheel.style.visibility = 'hidden';
-        if (isMobile) {
-          kineticWheel.style.transform = `translate3d(0, 0, 0)`;
-          if (figureGroupRef.current) figureGroupRef.current.style.opacity = '1';
-        } else {
-          kineticWheel.style.transform = `rotate(180deg)`;
-        }
+        kineticWheel.style.transform = `rotate(180deg)`;
       }
     }
   });

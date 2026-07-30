@@ -35,7 +35,7 @@ const Footer = () => {
   };
 
   return (
-    <footer ref={footerRef} className="relative bg-black text-white font-sans pt-12 md:pt-20 border-t border-white h-screen flex flex-col overflow-hidden">
+    <footer ref={footerRef} className="relative bg-black text-white font-sans pt-24 pb-28 md:pt-20 border-t border-white min-h-screen md:h-screen flex flex-col overflow-y-auto md:overflow-hidden">
       <FooterExplosion footerRef={footerRef} />
 
       {/* Top Section: Info Grid */}
