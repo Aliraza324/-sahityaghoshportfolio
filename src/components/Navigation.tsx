@@ -27,7 +27,7 @@ const navItems: NavItem[] = [
 const socialItems: SocialItem[] = [
   { label: "GitHub", href: "https://github.com/SAHITYA350" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/sahitya-ghosh-9ba098292/" },
-  { label: "LeetCode", href: "https://leetcode.com/balasur" },
+  { label: "LeetCode", href: "https://leetcode.com/u/sahityaghosh/" },
   { label: "Email", href: "mailto:sahityaghosh350@gmail.com" },
 ];
 

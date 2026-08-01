@@ -84,7 +84,7 @@ const SocialStrip = () => {
   const socials = [
     { label: "GitHub", href: "https://github.com/SAHITYA350" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/sahitya-ghosh-9ba098292/" },
-    { label: "LeetCode", href: "https://leetcode.com/balasur" },
+    { label: "LeetCode", href: "https://leetcode.com/u/sahityaghosh/" },
     { label: "Email", href: "mailto:sahityaghosh350@gmail.com" },
   ];
   return (
@@ -168,7 +168,7 @@ const MobileSocialStrip = () => {
   const socials = [
     { label: "Github", icon: Github, href: "https://github.com/SAHITYA350" },
     { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/sahitya-ghosh-9ba098292/" },
-    { label: "LeetCode", icon: Code, href: "https://leetcode.com/balasur" },
+    { label: "LeetCode", icon: Code, href: "https://leetcode.com/u/sahityaghosh/" },
     { label: "Email", icon: Mail, href: "mailto:sahityaghosh350@gmail.com" },
   ];
   return (

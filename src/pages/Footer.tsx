@@ -91,7 +91,7 @@ const Footer = () => {
               GitHub ↗
             </a>
             <a
-              href="https://leetcode.com/balasur"
+              href="https://leetcode.com/u/sahityaghosh/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide hover:underline underline-offset-4 decoration-1 w-fit flex items-center gap-1 text-white/60"
