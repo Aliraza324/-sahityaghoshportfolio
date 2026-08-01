@@ -1,0 +1,21 @@
+{
+  "short_name": "Sahitya Portfolio",
+  "name": "Sahitya Ghosh | AI Engineer & Full Stack Developer Portfolio",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "me.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "display": "standalone",
+  "description": "Official portfolio of Sahitya Ghosh. AI Engineer and Full Stack Developer."
+}
