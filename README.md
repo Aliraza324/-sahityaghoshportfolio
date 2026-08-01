@@ -2,7 +2,7 @@
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sahitya-ghosh-9ba098292/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SAHITYA350)
-[![Portfolio](https://img.shields.io/badge/Live_Portfolio-0284c7?style=for-the-badge&logo=render&logoColor=white)](https://sahityaghoshportfolio.onrender.com)
+[![Portfolio](https://img.shields.io/badge/Live_Portfolio-0284c7?style=for-the-badge&logo=render&logoColor=white)](https://atsahityaghosh.onrender.com/)
 
 A high-performance personal portfolio showcasing full-stack engineering expertise, architectural design, and a focus on transforming complex problems into elegant, automated solutions.
 
