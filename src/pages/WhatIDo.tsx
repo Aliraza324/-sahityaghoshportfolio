@@ -24,41 +24,41 @@ const services: ServiceItem[] = [
   {
     id: "ai",
     num: "01",
-    title: "Agentic AI & RAG",
-    description: "I design multi-agent pipelines and RAG architectures using LangChain and LangGraph. From building 'Second Brain' knowledge graphs to 6-agent collaborative platforms, I engineer AI that automates complex workflows.",
-    details: ["Multi-Agent Pipelines", "LangGraph & LangChain", "Vector Databases & RAG"],
+    title: "Artificial Intelligence",
+    description: "Codesinc designs AI-driven features and automation pipelines that turn raw data into production-ready capabilities, integrated directly into client products and internal workflows.",
+    details: ["AI-Driven Innovation", "Workflow Automation", "Data-Driven Products"],
     icon: <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 shrink-0" />,
   },
   {
     id: "fullstack",
     num: "02",
-    title: "Full-Stack SaaS Dev",
-    description: "I build production-ready SaaS platforms from scratch using MERN, Django, and Next.js. I integrate secure B2B billing and decouple AI ingestion from HTTP requests to cut upload wait times down to seconds.",
-    details: ["MERN & Django Architecture", "Async Document Processing", "Payment Gateway Integration"],
+    title: "Web, Mobile & Software Dev",
+    description: "From custom web applications to native mobile apps and enterprise software, Codesinc builds production-ready platforms end-to-end — including ecommerce and startup MVPs.",
+    details: ["Web & Mobile Development", "Custom Software Engineering", "Ecommerce & Startup Solutions"],
     icon: <Layout className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 shrink-0" />,
   },
   {
     id: "system",
     num: "03",
-    title: "Microservices",
-    description: "I architect event-driven microservices ecosystems using RabbitMQ and Docker. I ensure scalable, real-time tracking for thousands of concurrent requests backed by Redis and Socket.IO.",
-    details: ["Event-Driven Systems", "Docker Containerization", "RabbitMQ & Redis"],
+    title: "DevOps & Managed Cloud",
+    description: "Codesinc automates build, test, and deployment pipelines and manages the cloud infrastructure behind them, keeping client systems reliable and easy to scale.",
+    details: ["CI/CD Automation", "Managed Cloud Hosting", "Infrastructure Monitoring"],
     icon: <Cpu className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 shrink-0" />,
   },
   {
     id: "perf",
     num: "04",
-    title: "Performance Optimization",
-    description: "I dig into existing codebases to find what's slow or fragile, then fix it. Through backend optimization, efficient query handling, and decoupled pipelines, I deliver measurable latency gains of 30-40%.",
-    details: ["API & Latency Optimization", "Async Decoupling", "Query Profiling"],
+    title: "Business Intelligence",
+    description: "We turn operational data into dashboards and reporting that support faster, better-informed business decisions, backed by dedicated IT resource allocation where it's needed.",
+    details: ["Analytics & Dashboards", "Reporting", "IT Resource Allocation"],
     icon: <Activity className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 shrink-0" />,
   },
   {
     id: "ml",
     num: "05",
-    title: "Machine Learning & Data",
-    description: "I train and integrate ML models for text classification and object detection using TensorFlow. I process large datasets with Pandas and NumPy, bridging the gap between raw data and production AI features.",
-    details: ["TensorFlow Model Training", "Data Processing (Pandas/NumPy)", "AI Feature Integration"],
+    title: "BPO & Digital Marketing",
+    description: "Beyond engineering, Codesinc supports clients with business process outsourcing and digital marketing services that grow brand presence alongside the products we build.",
+    details: ["Business Process Outsourcing", "Digital Marketing", "Brand Growth"],
     icon: <Lightbulb className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 shrink-0" />,
   },
 ];
@@ -203,7 +203,7 @@ export const WhatIDo: React.FC = () => {
               className="font-medium text-white/50 leading-snug sm:leading-relaxed max-w-sm"
               style={{ fontSize: "clamp(0.6rem, 2.5vw, 1rem)" }}
             >
-              AI & Full-Stack Engineer specializing in Agentic AI, distributed microservices, and high-performance SaaS platforms.
+              A B2B technology company delivering cutting-edge software, AI, and digital transformation solutions for businesses worldwide.
             </p>
           </div>
         </div>

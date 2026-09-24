@@ -47,90 +47,90 @@ const About = () => {
           style={{ y: y1, opacity: opacity1 }}
         >
           <h2 className="font-sans text-xs md:text-sm font-bold uppercase tracking-widest text-black/90">
-            Background & Data
+            Company Profile
           </h2>
         </motion.div>
 
         {/* Right Column: The Data List */}
         <div className="md:col-span-9 lg:col-span-9 flex flex-col gap-4 md:gap-7">
 
-          {/* 01. EDUCATION */}
+          {/* 01. WHO WE ARE */}
           <motion.div style={{ y: y2, opacity: opacity2 }} className="flex flex-col gap-1">
             <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide opacity-100 mb-0.5">
-              01. Education
+              01. Who We Are
             </h3>
             <div className="flex flex-col">
               <p className="font-sans text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-snug tracking-tight">
-                Nalanda Institute of Technology, Bhubaneswar
+                Codesinc — World's Finest Technology Hub
               </p>
               <p className="font-sans text-[13px] sm:text-base md:text-lg lg:text-xl font-normal text-black/70 leading-snug tracking-tight">
-                B.Tech, Computer Science & Engineering (2023–2027) — CGPA: 8.50 / 10
+                A B2B technology company delivering cutting-edge software solutions, web and mobile app development, AI-driven innovations, and digital transformation services.
               </p>
             </div>
           </motion.div>
 
-          {/* 02. EXPERIENCE */}
+          {/* 02. GLOBAL PRESENCE */}
           <motion.div style={{ y: y3, opacity: opacity3 }} className="flex flex-col gap-1">
             <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide opacity-100 mb-0.5">
-              02. Experience
+              02. Global Presence
             </h3>
 
             <div className="flex flex-col gap-2 md:gap-3">
-              {/* Job 1 */}
+              {/* Office 1 */}
               <div>
                 <p className="font-sans text-base sm:text-lg md:text-xl font-bold leading-snug tracking-tight">
-                  MindBrain Innovations Pvt. Ltd.
+                  Pakistan
                 </p>
                 <p className="font-sans text-[13px] sm:text-base md:text-lg font-normal text-black/70 leading-snug tracking-tight">
-                  Python Full-Stack Intern (June 2026 – July 2026 · Onsite - Bhubaneswar)
+                  Rahim Yar Khan (+92 301 3887598) · Lahore (+92 331 0099811)
                 </p>
               </div>
 
-              {/* Job 2 */}
+              {/* Office 2 */}
               <div>
                 <p className="font-sans text-base sm:text-lg md:text-xl font-bold leading-snug tracking-tight">
-                  Jayesta Corporate Entity
+                  Australia & USA
                 </p>
                 <p className="font-sans text-[13px] sm:text-base md:text-lg font-normal text-black/70 leading-snug tracking-tight">
-                  Full-Stack Web Development Intern (June 2025 – July 2025 · Remote)
+                  Melbourne (+61 386 460100) · Bangor, Maine (+1 207 947-9333)
                 </p>
               </div>
 
-              {/* Job 3 */}
+              {/* Office 3 */}
               <div>
                 <p className="font-sans text-base sm:text-lg md:text-xl font-bold leading-snug tracking-tight">
-                  1Stop.ai
+                  France
                 </p>
                 <p className="font-sans text-[13px] sm:text-base md:text-lg font-normal text-black/70 leading-snug tracking-tight">
-                  Artificial Intelligence Intern (March 2025 – April 2025 · Remote)
+                  Toulouse (+33 6 21 33 76 27)
                 </p>
               </div>
             </div>
           </motion.div>
 
-          {/* 03. FOCUS */}
+          {/* 03. CORE SERVICES */}
           <motion.div style={{ y: y4, opacity: opacity4 }} className="flex flex-col gap-1">
             <h3 className="font-sans text-xs md:text-sm font-bold uppercase tracking-wide opacity-100 mb-0.5">
-              03. Focus & Achievements
+              03. Core Services
             </h3>
             <ul className="flex flex-col gap-1 md:gap-1.5">
               <li className="font-sans text-sm sm:text-base md:text-lg font-bold leading-snug tracking-tight">
-                Agentic AI, RAG Systems & Multi-Agent Architecture (LangChain / LangGraph)
+                Web, Mobile & Software Development (Custom Applications, Ecommerce, Startups)
               </li>
               <li className="font-sans text-sm sm:text-base md:text-lg font-bold leading-snug tracking-tight">
-                Full-Stack SaaS & Event-Driven Microservices (MERN / Python / Docker)
+                Artificial Intelligence, DevOps & Managed Cloud Hosting
               </li>
               <li className="font-sans text-[11px] sm:text-xs md:text-sm lg:text-base font-medium text-black/75 leading-snug tracking-tight flex items-center gap-2 mt-0.5">
                 <Trophy className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
-                <span>5th Runner-Up — TRIDENT Hackathon 2026 (Team MOMENT)</span>
+                <span>More Than 5 Years of IT Experience</span>
               </li>
               <li className="font-sans text-[11px] sm:text-xs md:text-sm lg:text-base font-medium text-black/75 leading-snug tracking-tight flex items-center gap-2">
                 <Award className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
-                <span>Python Full-Stack Development Certification — MindBrain Innovations</span>
+                <span>Business Intelligence, IT Resource Allocation & BPO</span>
               </li>
               <li className="font-sans text-[11px] sm:text-xs md:text-sm lg:text-base font-medium text-black/75 leading-snug tracking-tight flex items-center gap-2">
                 <Zap className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
-                <span>200+ Algorithmic Problems Solved on LeetCode</span>
+                <span>helpdesk@codes-inc.com · +92 312 6806286</span>
               </li>
             </ul>
           </motion.div>
