@@ -17,18 +17,18 @@ interface SocialItem {
 const navItems: NavItem[] = [
   { label: "Home", href: "#top", number: "01" },
   { label: "About", href: "#about", number: "02" },
-  { label: "Work", href: "#work", number: "03" },
-  { label: "What I Do", href: "#what-i-do", number: "04" },
+  { label: "Services", href: "#work", number: "03" },
+  { label: "Expertise", href: "#what-i-do", number: "04" },
   { label: "Philosophy", href: "#philosophy", number: "05" },
   { label: "Credentials", href: "#credentials", number: "06" },
   { label: "Contact", href: "#contact", number: "07" },
 ];
 
 const socialItems: SocialItem[] = [
-  { label: "GitHub", href: "https://github.com/SAHITYA350" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/sahitya-ghosh-9ba098292/" },
-  { label: "LeetCode", href: "https://leetcode.com/u/sahityaghosh/" },
-  { label: "Email", href: "mailto:sahityaghosh350@gmail.com" },
+  { label: "Facebook", href: "https://www.facebook.com/codesincpak" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/codesinc/posts/?feedView=all&viewAsMember=true" },
+  { label: "Instagram", href: "https://www.instagram.com/codesinc_pakistan/" },
+  { label: "WhatsApp", href: "https://wa.me/923126806286" },
 ];
 
 const ease = [0.76, 0, 0.24, 1] as [number, number, number, number];
@@ -227,7 +227,7 @@ const Navigation = () => {
               exit={{ opacity: 0, transition: { duration: 0.6 } }}
               className="text-xs text-white/20 font-mono tracking-widest mt-8 md:mt-0 md:self-end"
             >
-              © 2026 SAHITYA GHOSH
+              © 2026 CODESINC — ADVANCED RESEARCH PROJECTS & TECHNOLOGY
             </motion.p>
           </motion.div>
         )}

@@ -8,7 +8,7 @@ const MagicBento = () => {
         {/* Section Header */}
         <div className="mb-24">
           <h2 className="font-sans text-xs font-bold uppercase tracking-[0.2em]">
-            More About Me
+            Why Codesinc
           </h2>
         </div>
 
@@ -16,31 +16,31 @@ const MagicBento = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-40">
 
           <SwissItem
-            value={10}
+            value={5}
             suffix="+"
-            label="Projects Completed"
-            description="Completed multiple projects from concept to final implementation."
+            label="Years of IT Experience"
+            description="Delivering technology solutions across multiple industries and markets since inception."
           />
 
           <SwissItem
-            value={2}
-            suffix="+"
-            label="Years Experience"
-            description="Building software with architectural intent and predictable system behavior."
+            value={5}
+            suffix=""
+            label="Global Office Locations"
+            description="Presence across Pakistan, Australia, the United States, and France."
           />
 
           <SwissItem
-            value={500}
+            value={12}
             suffix="+"
-            label="Engineering Hours"
-            description="Engineering judgment refined through real-world constraints."
+            label="Core Service Domains"
+            description="From AI and DevOps to ecommerce and digital marketing — full-spectrum technology coverage."
           />
 
           <SwissItem
             value={1}
             suffix="st"
-            label="Systems First"
-            description="Architecture precedes interface. Structure defines outcome."
+            label="Clients First"
+            description="Every engagement is built around measurable business outcomes, not just code."
           />
 
         </div>

@@ -62,15 +62,15 @@ const SkillsPhilosophy = () => {
               className="font-bold uppercase tracking-widest text-black/90"
               style={{ fontSize: "clamp(0.55rem, 2vw, 0.8rem)" }}
             >
-              Skills & Philosophy
+              Technology & Philosophy
             </h2>
           </div>
           <div className="md:col-span-4">
-            <blockquote 
+            <blockquote
               className="font-black uppercase leading-tight tracking-tight"
               style={{ fontSize: "clamp(0.9rem, 5vw, 3.5rem)" }} // Fluid down to 250px
             >
-              “The best engineers don't just write code — they build leverage. AI is the highest leverage tool of our generation.”
+              "We are problem solvers, pioneers, and innovators — a team of IT consultants with presence at the key technology innovation hubs around the world."
             </blockquote>
           </div>
         </motion.div>

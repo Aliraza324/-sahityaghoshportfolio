@@ -52,13 +52,13 @@ const Footer = () => {
             Identification
           </h3>
           <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide leading-relaxed">
-            Sahitya Ghosh
+            Codesinc
           </p>
           <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide leading-relaxed text-white/60">
-            AI & Full-Stack Software Engineer
+            B2B Technology Solutions Company
           </p>
           <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide leading-relaxed text-white/60">
-            Kolkata, West Bengal, India [Lat: 22.57, Long: 88.36]
+            Rahim Yar Khan, Pakistan · Lahore · Melbourne · Bangor · Toulouse
           </p>
         </motion.div>
 
@@ -69,13 +69,13 @@ const Footer = () => {
           </h3>
           <div className="flex flex-col gap-2">
             <a
-              href="mailto:sahityaghosh350@gmail.com"
+              href="mailto:helpdesk@codes-inc.com"
               className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide hover:underline underline-offset-4 decoration-1 w-fit flex items-center gap-1"
             >
               Email ↗
             </a>
             <a
-              href="https://www.linkedin.com/in/sahitya-ghosh-9ba098292/"
+              href="https://www.linkedin.com/company/codesinc/posts/?feedView=all&viewAsMember=true"
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide hover:underline underline-offset-4 decoration-1 w-fit flex items-center gap-1"
@@ -83,20 +83,20 @@ const Footer = () => {
               LinkedIn ↗
             </a>
             <a
-              href="https://github.com/SAHITYA350"
+              href="https://wa.me/923126806286"
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide hover:underline underline-offset-4 decoration-1 w-fit flex items-center gap-1"
             >
-              GitHub ↗
+              WhatsApp ↗
             </a>
             <a
-              href="https://leetcode.com/u/sahityaghosh/"
+              href="https://www.instagram.com/codesinc_pakistan/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide hover:underline underline-offset-4 decoration-1 w-fit flex items-center gap-1 text-white/60"
             >
-              LeetCode (200+) ↗
+              Instagram ↗
             </a>
           </div>
         </motion.div>
@@ -111,10 +111,10 @@ const Footer = () => {
               Built With: React / TypeScript / Framer / Lenis / Gsap / scroltrigger
             </p>
             <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide text-white/60">
-             Book your Meeting / instance meeting
+             Book your Meeting / instant call
             </p>
             <p className="font-sans text-xs md:text-sm font-medium uppercase tracking-wide text-white/60">
-              Deployed On: Render
+              Phone: +92 312 6806286
             </p>
           </div>
 
@@ -132,7 +132,7 @@ const Footer = () => {
         className="w-full flex-1 flex flex-col justify-center items-center overflow-hidden select-none pb-4 relative z-20"
       >
         <h1 className="font-sans font-black text-[21vw] leading-[0.8] text-white uppercase tracking-tighter flex items-start">
-          Sahitya
+          Codesinc
           <span className="text-xl md:text-4xl lg:text-6xl font-medium mt-[2vw] ml-1 opacity-60">
             ®
           </span>

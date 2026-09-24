@@ -52,7 +52,7 @@ const CodeShipRepeat: React.FC = () => {
           >
             <img
               src="/me1.jpeg"
-              alt="Sahitya Ghosh"
+              alt="Codesinc"
               className="w-full h-[360px] md:h-[460px] object-cover object-center grayscale contrast-110 transition-all duration-700 ease-out transform group-hover:grayscale-0 group-hover:scale-105"
             />
           </motion.div>
@@ -87,15 +87,15 @@ const CodeShipRepeat: React.FC = () => {
             className="flex flex-col gap-8 max-w-[720px]"
           >
             <p className="text-xl sm:text-2xl md:text-3xl font-medium leading-snug text-white/90 tracking-tight">
-              I take software from idea to production, and I like systems that stay fast under load and code that's still easy to work in a year later.
+              We take software from idea to production, building systems that stay fast under load and code that's still easy to work in a year later.
             </p>
 
             <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
               <span className="text-xs font-bold uppercase tracking-widest text-white/55 shrink-0 pt-1">
-                ( ABOUT ME )
+                ( ABOUT US )
               </span>
               <p className="text-base sm:text-lg text-white/75 leading-relaxed font-normal">
-                Most of my time goes into building agentic AI platforms, RAG systems, and event-driven microservices. I hold everything I ship to high technical standards with clean, maintainable architecture.
+                Codesinc's engineers focus on building AI-driven platforms, scalable web & mobile applications, and event-driven microservices — holding every delivery to a high technical and architectural standard.
               </p>
             </div>
           </motion.div>

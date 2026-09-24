@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion, useSpring, useMotionValue, useScroll, useTransform } from "framer-motion";
-import { Github, Linkedin, Instagram, Mail, Code } from "lucide-react";
+import { Facebook, Linkedin, Instagram, MessageCircle } from "lucide-react";
 import { useLenis } from "lenis/react";
 
 // Components
@@ -56,7 +56,7 @@ const BrandLogo = () => (
     className="fixed top-6 left-6 md:top-8 md:left-10 z-[200]"
   >
     <a href="#" className="font-sans font-bold text-xl md:text-2xl tracking-tight text-white uppercase flex items-center gap-1">
-      SAHITYA<span className="text-xs align-top font-normal">®</span>
+      CODESINC<span className="text-xs align-top font-normal">®</span>
     </a>
   </motion.div>
 );
@@ -75,17 +75,17 @@ const AvailabilityBadge = () => (
         letterSpacing: "0.22em",
       }}
     >
-      AVAILABLE FOR WORK
+      5+ YEARS OF IT EXPERIENCE
     </span>
   </motion.div>
 );
 
 const SocialStrip = () => {
   const socials = [
-    { label: "GitHub", href: "https://github.com/SAHITYA350" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/sahitya-ghosh-9ba098292/" },
-    { label: "LeetCode", href: "https://leetcode.com/u/sahityaghosh/" },
-    { label: "Email", href: "mailto:sahityaghosh350@gmail.com" },
+    { label: "Facebook", href: "https://www.facebook.com/codesincpak" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/codesinc/posts/?feedView=all&viewAsMember=true" },
+    { label: "Instagram", href: "https://www.instagram.com/codesinc_pakistan/" },
+    { label: "WhatsApp", href: "https://wa.me/923126806286" },
   ];
   return (
     <motion.div
@@ -166,10 +166,10 @@ const SpinningCTA = () => {
 
 const MobileSocialStrip = () => {
   const socials = [
-    { label: "Github", icon: Github, href: "https://github.com/SAHITYA350" },
-    { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/sahitya-ghosh-9ba098292/" },
-    { label: "LeetCode", icon: Code, href: "https://leetcode.com/u/sahityaghosh/" },
-    { label: "Email", icon: Mail, href: "mailto:sahityaghosh350@gmail.com" },
+    { label: "Facebook", icon: Facebook, href: "https://www.facebook.com/codesincpak" },
+    { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/codesinc/posts/?feedView=all&viewAsMember=true" },
+    { label: "Instagram", icon: Instagram, href: "https://www.instagram.com/codesinc_pakistan/" },
+    { label: "WhatsApp", icon: MessageCircle, href: "https://wa.me/923126806286" },
   ];
   return (
     <motion.div
@@ -241,7 +241,7 @@ const Index = () => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <h1 className="font-sans font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.8rem] leading-[0.88] tracking-tighter text-white uppercase text-left">
-                AI & <br /> Full-Stack<br />Engineer
+                World's Finest <br /> Technology<br />Hub
               </h1>
             </motion.div>
 
@@ -254,19 +254,21 @@ const Index = () => {
               <div>
                 <div className="w-12 h-[2px] bg-white mb-4 md:hidden" />
                 <p className="font-sans text-xs sm:text-sm md:text-base font-medium text-white/90 leading-relaxed tracking-wide uppercase text-left">
-                  Building production-ready RAG pipelines, Agentic AI workflows, distributed microservices, and modern scalable SaaS applications.
+                  Delivering cutting-edge software solutions, web & mobile app development, AI-driven innovations, and digital transformation services for businesses worldwide.
                 </p>
               </div>
 
-              {/* Magnetic RESUME Button */}
+              {/* Magnetic GET A FREE QUOTE Button */}
               <Magnetic strength={0.22}>
                 <a
-                  href="/resume.jpeg"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    lenis?.scrollTo("#contact");
+                  }}
                   className="group relative overflow-hidden border-2 border-white/20 px-6 py-3.5 flex items-center gap-2 hover:border-white transition-all duration-500 rounded-full bg-white/5 backdrop-blur-md font-sans font-bold text-xs tracking-[0.22em] uppercase text-white shadow-lg"
                 >
-                  <span className="relative z-10">Resume</span>
+                  <span className="relative z-10">Get a Free Quote</span>
                   <svg className="relative z-10 w-3.5 h-3.5 text-white/70 group-hover:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M7 17L17 7M17 7H7M17 7v10" />
                   </svg>
@@ -284,7 +286,7 @@ const Index = () => {
             <div className="relative group w-48 h-64 sm:w-56 sm:h-76 md:w-60 md:h-[22rem] lg:w-[20rem] lg:h-[26rem] xl:w-[22rem] xl:h-[28rem] rounded-3xl overflow-hidden border-2 border-white/40 bg-[#0e0e0e]/70 shadow-[14px_14px_0px_0px_rgba(255,255,255,0.85)] hover:shadow-[20px_20px_0px_0px_rgba(255,255,255,1)] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-500 cursor-pointer shrink-0">
               <img
                 src="/me.jpg"
-                alt="Sahitya Ghosh"
+                alt="Codesinc"
                 className="w-full h-full object-cover object-top grayscale contrast-115 transition-all duration-700 ease-out transform group-hover:grayscale-0 group-hover:scale-105"
               />
             </div>

@@ -38,8 +38,8 @@ const getWaveExitConfig = (p: number) => {
 };
 
 const PagePreloader: React.FC<PagePreloaderProps> = ({
-  name = "SAHITYA GHOSH",
-  subtitle = "Portfolio 2026",
+  name = "CODESINC",
+  subtitle = "World's Finest Technology Hub",
   children,
   onComplete,
 }) => {
