@@ -42,7 +42,7 @@ export const Contact: React.FC = () => {
             first_name: formData.firstName,
             last_name: formData.lastName,
             email: formData.email,
-            to_email: "sahityaghosh350@gmail.com",
+            to_email: "helpdesk@codes-inc.com",
             subject: formData.subject,
             message: formData.message,
           },
@@ -105,7 +105,7 @@ export const Contact: React.FC = () => {
             <motion.div variants={itemVariants} className="mb-4 lg:mb-0">
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.9] tracking-tight text-left">
                 Contact <br />
-                Me <span className="inline-block ml-2">→</span>
+                Us <span className="inline-block ml-2">→</span>
               </h1>
             </motion.div>
 
@@ -143,7 +143,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <p className="text-black/70 text-[11px] leading-relaxed font-sans">
                   • <strong>Instant Video Call:</strong> Click Join Call → Enter your Name & First login (via Google/GitHub) when prompted by Jitsi to join the room.<br />
-                  • <strong>30-Min Calendar Meeting:</strong> Pick any 24h slot or custom time to send a meeting invite to Sahitya & receive an instant email copy then login (via Google/GitHub).
+                  • <strong>30-Min Calendar Meeting:</strong> Pick any 24h slot or custom time to send a meeting invite to Codesinc & receive an instant email copy then login (via Google/GitHub).
                 </p>
               </div>
             </motion.div>
@@ -251,7 +251,7 @@ export const Contact: React.FC = () => {
 
               {status === "error" && (
                 <p className="text-xs text-red-600 font-mono text-center">
-                  Failed to send message. Please try emailing directly at sahityaghosh350@gmail.com
+                  Failed to send message. Please try emailing directly at helpdesk@codes-inc.com
                 </p>
               )}
             </form>

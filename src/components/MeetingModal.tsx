@@ -65,7 +65,7 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
     if (isOpen) {
       setActiveTab(initialTab);
       setBookingStatus("idle");
-      const uniqueRoom = `SahityaMeeting_${Math.floor(100000 + Math.random() * 900000)}_${Date.now().toString().slice(-4)}`;
+      const uniqueRoom = `CodesincMeeting_${Math.floor(100000 + Math.random() * 900000)}_${Date.now().toString().slice(-4)}`;
       setJitsiRoomName(uniqueRoom);
     }
   }, [isOpen, initialTab]);
@@ -92,11 +92,11 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
 
     const effectiveTime = finalTimeDisplay;
     const cleanTime = effectiveTime.replace(/[^a-zA-Z0-9]/g, "");
-    const generatedRoom = `SahityaMeeting_July${selectedDate}_${cleanTime}_${Math.floor(1000 + Math.random() * 9000)}`;
+    const generatedRoom = `CodesincMeeting_July${selectedDate}_${cleanTime}_${Math.floor(1000 + Math.random() * 9000)}`;
     const meetUrl = `https://meet.jit.si/${generatedRoom}${jitsiEmbedFlags}`;
     setConfirmedMeetUrl(meetUrl);
 
-    // 1. Send Host Notification to Sahitya (sahityaghosh350@gmail.com)
+    // 1. Send Host Notification to Codesinc (helpdesk@codes-inc.com)
     try {
       await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method: "POST",
@@ -111,9 +111,9 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
             first_name: attendeeName,
             last_name: "(Scheduled Meeting)",
             email: attendeeEmail,
-            to_email: "sahityaghosh350@gmail.com",
+            to_email: "helpdesk@codes-inc.com",
             subject: `📅 New 30-Min Meeting Booking: July ${selectedDate} at ${effectiveTime}`,
-            message: `A visitor picked a time slot to meet you!\n\nAttendee Name: ${attendeeName}\nAttendee Email: ${attendeeEmail}\nRequested Date & Time: July ${selectedDate}, 2026 at ${effectiveTime}\n\nDirect Meeting Room Link: ${meetUrl}`,
+            message: `A visitor picked a time slot to meet Codesinc!\n\nAttendee Name: ${attendeeName}\nAttendee Email: ${attendeeEmail}\nRequested Date & Time: July ${selectedDate}, 2026 at ${effectiveTime}\n\nDirect Meeting Room Link: ${meetUrl}`,
           },
         }),
       });
@@ -121,7 +121,7 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
       console.warn("EmailJS host meeting notification error:", err);
     }
 
-    // 2. Send Confirmation Email to Visitor/Attendee (e.g. sahityaghosh142@gmail.com)
+    // 2. Send Confirmation Email to Visitor/Attendee
     try {
       await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method: "POST",
@@ -138,8 +138,8 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
             email: attendeeEmail,
             to_email: attendeeEmail,
             user_email: attendeeEmail,
-            subject: `✅ Meeting Confirmed with Sahitya Ghosh: July ${selectedDate} at ${effectiveTime}`,
-            message: `Hi ${attendeeName},\n\nYour 30-minute consultation with Sahitya Ghosh is confirmed for July ${selectedDate}, 2026 at ${effectiveTime}.\n\nJoin Meeting Room Link: ${meetUrl}\n\nThank you!`,
+            subject: `✅ Meeting Confirmed with Codesinc: July ${selectedDate} at ${effectiveTime}`,
+            message: `Hi ${attendeeName},\n\nYour 30-minute consultation with Codesinc is confirmed for July ${selectedDate}, 2026 at ${effectiveTime}.\n\nJoin Meeting Room Link: ${meetUrl}\n\nThank you!`,
           },
         }),
       });
@@ -181,10 +181,10 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
           template_params: {
             first_name: "Instant Visitor",
             last_name: "(Live Video Call)",
-            email: "instant-call@portfolio.dev",
-            to_email: "sahityaghosh350@gmail.com",
+            email: "instant-call@codes-inc.com",
+            to_email: "helpdesk@codes-inc.com",
             subject: `🚨 Instant Video Call Alert: Visitor Waiting in Room!`,
-            message: `A visitor just clicked to start an Instant 1-on-1 Video Call with you from your live portfolio!\n\nRoom ID: ${jitsiRoomName}\n\nDirect Live Meeting Join Link:\n${fullJitsiUrl}\n\nPlease click the link above immediately to enter the video room and meet your visitor!`,
+            message: `A visitor just clicked to start an Instant 1-on-1 Video Call with Codesinc from the live website!\n\nRoom ID: ${jitsiRoomName}\n\nDirect Live Meeting Join Link:\n${fullJitsiUrl}\n\nPlease click the link above immediately to enter the video room and meet your visitor!`,
           },
         }),
       });
@@ -222,11 +222,11 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
             <div className="flex items-center justify-between px-3.5 sm:px-6 py-3 sm:py-4 border-b border-white/10 bg-white/5 shrink-0">
               <div className="flex items-center gap-2.5 min-w-0">
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/40 bg-white p-[1.5px] overflow-hidden flex items-center justify-center shrink-0">
-                  <img src="/favicon.png" alt="Sahitya Logo" className="w-full h-full object-cover rounded-full" />
+                  <img src="/favicon.png" alt="Codesinc Logo" className="w-full h-full object-cover rounded-full" />
                 </div>
                 <div className="min-w-0">
                   <h3 className="font-bold text-xs sm:text-base text-white tracking-wide font-mono truncate">
-                    Schedule @sahitya
+                    Schedule with Codesinc
                   </h3>
                   <p className="text-[9px] sm:text-xs text-white/50 font-mono truncate">30-Min Strategy Call & Video Consultation</p>
                 </div>
@@ -278,7 +278,7 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
                     </div>
                     <h2 className="text-base sm:text-2xl font-bold font-mono uppercase">Meeting Scheduled!</h2>
                     <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans">
-                      Your 30-min session with **Sahitya Ghosh** is confirmed for **July {selectedDate}, 2026 at {finalTimeDisplay}**.
+                      Your 30-min session with **Codesinc** is confirmed for **July {selectedDate}, 2026 at {finalTimeDisplay}**.
                     </p>
 
                     {/* Meeting Link Box */}
@@ -334,10 +334,10 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
                     {/* Sidebar */}
                     <div className="lg:col-span-4 space-y-3 border-b lg:border-b-0 lg:border-r border-white/10 pb-3 lg:pb-0 lg:pr-6">
                       <div className="flex items-center gap-2.5">
-                        <img src="/me.jpg" alt="Sahitya Ghosh" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-white/30 shrink-0" />
+                        <img src="/me.jpg" alt="Codesinc" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-white/30 shrink-0" />
                         <div className="min-w-0">
-                          <h4 className="font-bold text-xs sm:text-sm truncate">Sahitya Ghosh</h4>
-                          <p className="text-[10px] sm:text-xs text-white/50 font-mono truncate">AI & Full-Stack Engineer</p>
+                          <h4 className="font-bold text-xs sm:text-sm truncate">Codesinc</h4>
+                          <p className="text-[10px] sm:text-xs text-white/50 font-mono truncate">B2B Technology Solutions</p>
                         </div>
                       </div>
 
@@ -352,12 +352,12 @@ export const MeetingModal: React.FC<MeetingModalProps> = ({
                         </div>
                         <div className="flex items-center gap-2 text-white/90">
                           <Globe className="w-3.5 h-3.5 text-white/60 shrink-0" />
-                          <span>Asia/Kolkata (IST)</span>
+                          <span>Asia/Karachi (PKT)</span>
                         </div>
                       </div>
 
                       <p className="text-[10px] sm:text-xs text-white/60 leading-relaxed font-sans hidden sm:block">
-                        Book a 1-on-1 consultation to discuss custom RAG pipelines, agentic AI workflows, full-stack SaaS builds, or internship opportunities.
+                        Book a consultation to discuss web & mobile development, AI solutions, DevOps, or a custom project quote.
                       </p>
                     </div>
 

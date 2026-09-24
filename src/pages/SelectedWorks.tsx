@@ -6,91 +6,135 @@ import './ScrollStack.css';
 const projects = [
   {
     id: "001",
-    title: "Vault-AI: Knowledge Graph & RAG Platform",
-    stack: "Python / Django / LangChain / LangGraph / Docker / Mistral AI / Razorpay",
-    description: "An AI Knowledge Graph platform converting 6 file types (PDF, Image, DOCX, Markdown) into a searchable Knowledge Graph via a 2-node LangGraph RAG pipeline with top-40 semantic retrieval, page-level citations, and 3-15s asynchronous processing.",
+    title: "Web Design & Development",
+    stack: "Custom Web Applications / Responsive Design / UX Engineering",
+    description: "Codesinc designs and builds custom, high-performance websites and web applications tailored to each client's brand and workflow — from marketing sites to complex web platforms.",
     links: {
-      live: "https://vaultai-jnof.onrender.com",
-      code: "https://github.com/SAHITYA350/Vault-AI"
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
     },
     image: "/p1.png",
   },
   {
     id: "002",
-    title: "ResearchMind AI OS: Multi-Agent System",
-    stack: "Python / LangChain / Streamlit / Plotly / ReportLab / python-docx",
-    description: "A 6-agent collaborative research OS (Search, Scrape, Research, Draft, Critique, Forecast) synthesizing multi-source findings into citation-ready reports with Plotly analytics and an 85% reduction in manual compilation time.",
+    title: "Mobile App Development",
+    stack: "iOS / Android / Cross-Platform",
+    description: "Native and cross-platform mobile applications engineered for performance and scale, taking products from concept through App Store and Play Store launch.",
     links: {
-      live: "https://researchmind-ai-os-8tgkgl4vd5ojcg4jzlpnpw.streamlit.app/",
-      code: "https://github.com/SAHITYA350/ResearchMind-AI-OS"
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
     },
     image: "/p2.png",
   },
   {
     id: "003",
-    title: "AI-Powered Food Delivery Ecosystem",
-    stack: "MERN / Microservices / RabbitMQ / Docker / LangChain / Redis / Socket.IO",
-    description: "An event-driven microservices architecture (10+ services) supporting 1,000+ concurrent orders, real-time tracking, Stripe/Razorpay SaaS payments, and voice-enabled semantic RAG ordering cutting checkout steps by 40%.",
+    title: "Software Development",
+    stack: "Custom Software / Enterprise Systems / Integrations",
+    description: "End-to-end custom software engineering for businesses that need systems built around their exact processes rather than off-the-shelf compromises.",
     links: {
-      live: "https://tomatowebapp-5f4d.onrender.com",
-      code: "https://github.com/SAHITYA350/TomatoWebAPP"
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
     },
-    image: "./p3.png",
+    image: "/p3.png",
   },
   {
     id: "004",
-    title: "SG Interview Prep AI Platform",
-    stack: "React / Node.js / Express / MongoDB / LangChain / Gemini AI",
-    description: "An AI candidate evaluation platform featuring dynamic interview question generation, response scoring, and real-time feedback, achieving 30% lower REST API latency and 40% performance gain.",
+    title: "Startup Solution",
+    stack: "MVP Development / Product Strategy / Rapid Iteration",
+    description: "From idea to MVP, Codesinc helps startups ship fast, validate early, and scale their technology as the business grows.",
     links: {
-      live: "https://sginterviewprepai.onrender.com/",
-      code: "https://github.com/SAHITYA350"
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
     },
-    image: "./p4.png",
+    image: "/p4.png",
   },
   {
     id: "005",
-    title: "Trimrr – MERN Stack URL Shortener",
-    stack: "React / Node.js / ExpressJS/ MongoDB / Tailwind",
-    description: "A responsive URL Shortener & Analytics platform using the MERN stack that allows users to create short links, generate QR codes, and track link performance in real time.",
+    title: "DevOps",
+    stack: "CI/CD / Infrastructure Automation / Monitoring",
+    description: "Automated build, test, and deployment pipelines with infrastructure-as-code, giving engineering teams faster, more reliable releases.",
     links: {
-      live: "https://trimrrs.onrender.com/",
-      code: "https://github.com/SAHITYA350/TRIMRR"
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
     },
-    image: "/p5.png", // Image placed in public/ folder
+    image: "/p5.png",
   },
   {
     id: "006",
-    title: "Cryptoverse – Crypto Dashboard",
-    stack: "React / Redux-Toolkit/ APIs / Tailwind / Frontend",
-    description: "Built a fully responsive Cryptocurrency Dashboard that delivers real-time market insights, historical price trends, and curated crypto news using multiple external APIs.",
+    title: "Artificial Intelligence",
+    stack: "AI-Driven Innovation / Automation / Data-Driven Products",
+    description: "Codesinc integrates AI-driven capabilities into products and internal workflows, turning data into automation and measurable business advantage.",
     links: {
-      live: "https://cryptoverse-gilt.vercel.app/",
-      code: "https://github.com/SAHITYA350/Cryptoverse"
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
     },
-    image: "/p6.png", // Image placed in public/ folder
+    image: "/p6.png",
   },
   {
     id: "007",
-    title: "DesignStudioPro",
-    stack: "React / Canvas / Konva / DaisyUI / Frontend",
-    description: "A modern, feature-rich Figma/Canva-like design tool built from scratch using React 19, Konva, Vite, Tailwind, and DaisyUI.",
+    title: "Ecommerce Solution",
+    stack: "Online Storefronts / Payments / Catalog & Order Management",
+    description: "Full-featured ecommerce platforms covering storefronts, payments, inventory, and order management for businesses selling online.",
     links: {
-      live: "https://design-studio-pro-orcin.vercel.app/",
-      code: "https://github.com/SAHITYA350/DesignStudioPro"
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
     },
-    image: "/p7.png", // Image placed in public/ folder
+    image: "/p7.png",
   },
   {
     id: "008",
-    title: "Media Search Application",
-    stack: "React / Redux-Toolkit / Framer-Motion / DaisyUI / Frontend",
-    description: "I built a fully responsive hashtag#Mediasearch application that allows users to discover, save, and manage photos, videos, and GIFs from multiple premium APIs, all wrapped in a high-end, animated dark UI.",
+    title: "Managed Cloud Hosting",
+    stack: "Cloud Infrastructure / Uptime / Managed Support",
+    description: "Reliable, managed cloud hosting and infrastructure management so clients can focus on their product while Codesinc keeps it running.",
     links: {
-      live: "https://media-search-zeta.vercel.app/",
-      code: "https://github.com/SAHITYA350/MediaSearch"
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
     },
-    image: "/p8.png", // Image placed in public/ folder
+    image: "/p8.png",
+  },
+  {
+    id: "009",
+    title: "IT Resource Allocation",
+    stack: "Staff Augmentation / Dedicated Teams",
+    description: "Flexible IT resourcing — from individual specialists to dedicated teams — allocated to client projects as capacity is needed.",
+    links: {
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
+    },
+    image: "/p1.png",
+  },
+  {
+    id: "010",
+    title: "Business Intelligence",
+    stack: "Analytics / Dashboards / Reporting",
+    description: "Turning raw business data into dashboards and reporting that support faster, better-informed decisions.",
+    links: {
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
+    },
+    image: "/p2.png",
+  },
+  {
+    id: "011",
+    title: "Business Process Outsourcing",
+    stack: "BPO / Back-Office Operations",
+    description: "Outsourced operational and back-office support that lets clients scale their business functions without scaling headcount.",
+    links: {
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
+    },
+    image: "/p3.png",
+  },
+  {
+    id: "012",
+    title: "Digital Marketing",
+    stack: "Growth / Brand Presence / Online Marketing",
+    description: "Digital marketing services that build brand presence and drive growth alongside the products Codesinc builds.",
+    links: {
+      live: "https://www.codes-inc.com",
+      quote: "#contact"
+    },
+    image: "/p4.png",
   },
 ];
 
@@ -127,20 +171,18 @@ const ScrollStackCard = ({ project, index }: ScrollStackCardProps) => {
               color="#ffffff, #333333, #ffffff"
               speed="3s"
             >
-              Live Demo ↗
+              Visit Site ↗
             </StarBorder>
           )}
-          {project.links.code && (
+          {project.links.quote && (
             <StarBorder
               as="a"
-              href={project.links.code}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={project.links.quote}
               className="live-btn-star"
               color="#ffffff, #333333, #ffffff"
               speed="4s"
             >
-              GitHub ↗
+              Get Quote ↗
             </StarBorder>
           )}
         </div>
@@ -465,7 +507,7 @@ const SelectedWorks = () => {
           <div className="marquee-selected-works__track">
             {[0, 1, 2, 3].map((blockIndex) => (
               <div key={blockIndex} className="marquee-selected-works__segment" aria-hidden={blockIndex > 0 ? "true" : undefined}>
-                <span className="marquee-selected-works__text">Selected Works</span>
+                <span className="marquee-selected-works__text">Our Services</span>
                 <span className="marquee-selected-works__dash">—</span>
               </div>
             ))}
